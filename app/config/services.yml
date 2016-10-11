@@ -5,6 +5,9 @@ services:
         class: AppBundle\Services\FileUploader
         arguments: ['%images_directory%']
 
+    app.albums_normalizer:
+            class: AppBundle\Serializer\AlbumsNormalizer
+
     app.album_normalizer:
             class: AppBundle\Serializer\AlbumNormalizer
 
