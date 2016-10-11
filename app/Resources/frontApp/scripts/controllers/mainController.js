@@ -1,6 +1,6 @@
 import Marionette from 'backbone.marionette';
 import $ from 'jquery';
-import routes from './../settings/routes'
+import routes from './../settings/routes';
 import AlbumsView from './../views/albumCollectionView';
 import AlbumCollection from './../collections/albums';
 import ImagesView from './../views/imageCollectionView';
@@ -9,14 +9,22 @@ import ImageCollection from './../collections/images';
 export default Marionette.Object.extend({
   initialize: function () {
     this.bodyView = this.getOption('mainRegion');
-    this.data = this.getOption('initialData');
   },
 
   showAlbums: function() {
-    var collection = new AlbumCollection(this.data),
-        view = new AlbumsView({collection: collection});
+    var collection,
+        view;
 
-    this.bodyView.showView(view);
+    $.ajax({
+      method: 'GET',
+      url: routes.getAlbums(),
+      success: function(data) {
+        console.log(JSON.parse(data));
+        collection = new AlbumCollection(JSON.parse(data));
+        view = new AlbumsView({collection: collection});
+        this.bodyView.showView(view);
+      }.bind(this)
+    });
   },
 
   showAlbum: function(id) {

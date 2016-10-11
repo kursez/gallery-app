@@ -7,7 +7,6 @@ export default Marionette.Application.extend({
 
   onStart: function () {
     new Router({
-      initialData: this.getOption('initialData'),
       mainRegion: this
     });
 

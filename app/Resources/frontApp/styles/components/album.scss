@@ -1,0 +1,39 @@
+.album {
+  height: 200px;
+  background-color: $color-gray;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 0.1s linear;
+  margin-bottom: $separator-md;
+  position: relative;
+
+  @extend %shadow-basic;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.album__info {
+  position: absolute;
+  width: 100%;
+  padding: 5%;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.album__name {
+  @extend .type;
+  @extend .type--title-sm;
+  @extend .type--white;
+}
+
+.album__count {
+  @extend .type;
+  @extend .type--text-sm;
+  @extend .type--white;
+
+  display: block;
+}

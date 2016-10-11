@@ -39,6 +39,10 @@
 @import "common/base";
 @import "common/icons";
 
-//Modules
+// Modules
+@import "modules/section";
 @import "modules/container";
 @import "modules/type";
+
+// Component
+@import "components/album";

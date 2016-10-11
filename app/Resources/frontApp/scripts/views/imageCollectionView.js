@@ -1,5 +1,4 @@
 import Marionette from 'backbone.marionette';
-import Backbone from 'backbone';
 import Image from './../views/imageView';
 
 export default Marionette.CollectionView.extend({

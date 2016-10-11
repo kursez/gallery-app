@@ -15,9 +15,13 @@ class AlbumsNormalizer implements NormalizerInterface
    */
   public function normalize($object, $format = null, array $context = array())
   {
+    $images = $object->getImages();
+
     return [
         'id'     => $object->getId(),
-        'name'   => $object->getName()
+        'name'   => $object->getName(),
+        'imageCount' => sizeof($images),
+        'featuredImage' => (sizeof($images) > 0) ? $images[0]->getSrc() : null
     ];
   }
 
