@@ -1,0 +1,111 @@
+/**
+* Position Utility
+* @author Konstantinos Kataras
+*
+*/
+
+// $separators array (if non present define here)
+$separators: ()!default;
+
+// $positions
+$positions: (
+    vertical: (top, bottom),
+    horizontal: (left, right),
+);
+
+.position {
+  position: absolute;
+
+  @each $vertical-position in map_get($positions, vertical) {
+    @each $horizontal-position in map_get($positions, horizontal) {
+      &--#{$vertical-position}-#{$horizontal-position} {
+        #{$vertical-position}: 0;
+        #{$horizontal-position}: 0;
+      }
+    }
+  }
+
+  @each $direction, $position in $positions {
+    @each $edge in map_get($positions, $direction) {
+      @each $separator-name, $separator in $separators {
+        &--#{$edge}-#{$separator-name} {
+          #{$edge}: $separator;
+        }
+
+        @each $reverseEdge in map_get($positions, $direction) {
+          @if $reverseEdge != $edge {
+            &--negative-#{$edge}-#{$separator-name} {
+              #{$reverseEdge}: calc(100% + #{$separator});
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @each $breakpoint-name, $breakpoint in $breakpoints {
+    &--static-over-#{$breakpoint-name} {
+      @include respond-to($breakpoint-name) {
+        position: static !important;
+      }
+    }
+
+    &--static-under-#{$breakpoint-name} {
+      @include respond-up-to($breakpoint-name) {
+        position: static !important;
+      }
+    }
+  }
+
+  &--relative {
+    position: relative;
+  }
+
+  &--cover {
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+  }
+
+  &--stressed {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  &--object-fit {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+
+  &--center {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &--left-side {
+    top: 0;
+    right: 100%;
+  }
+
+  &--right-side {
+    top: 0;
+    left: 100%;
+  }
+
+  &--middle-horizontal {
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  &--middle-vertical {
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+}

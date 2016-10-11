@@ -1,5 +1,6 @@
 /web/bundles/
 /web/uploads/
+/web/dist
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
@@ -13,3 +14,4 @@
 /composer.phar
 DD_Store
 .idea
+node_modules

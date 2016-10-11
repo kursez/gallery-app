@@ -1,0 +1,140 @@
+$placeholders: ();
+
+$default-breakpoint: root;
+$current-breakpoint: $default-breakpoint;
+
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $current-breakpoint: $breakpoint !global;
+
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+
+    $current-breakpoint: $default-breakpoint !global;
+  }
+
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+    + "Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}
+
+@mixin respond-up-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $value: map-get($breakpoints, $breakpoint) - 1;
+
+    @media (max-width: $value) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+    + "Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}
+
+@mixin respond-to-range($min, $max) {
+  @media (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+}
+
+@mixin retina() {
+  @media
+  only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
+    @content;
+  }
+}
+
+@mixin responsive-property($property) {
+  @each $breakpoint, $value in $breakpoints {
+    @media (min-width: $value) {
+      #{$property}: map-get($separators, $breakpoint);
+    }
+  }
+
+  $property: map-get($separators, xs);
+}
+
+@mixin responsiveFont($px: 16, $breakpointSize: 1200) {
+  font-size: #{(getProportion($px, $breakpointSize) * 100)}vw;
+}
+
+@mixin media-placeholder($name) {
+  @if not index($placeholders, $name) {
+    $placeholders: append($placeholders, $name) !global;
+
+    @each $breakpoint, $value in $breakpoints {
+      @media (min-width: $value) {
+        @at-root {
+          %#{$name}-#{$breakpoint} {
+            @content;
+          }
+        }
+      }
+    }
+
+    @at-root {
+      %#{$name}-#{$default-breakpoint} {
+        @content;
+      }
+    }
+  }
+}
+
+/**
+* Creates an extend-able typography style
+*
+*/
+@mixin type($fontFamilyName: 'Arial', $fontSize: 16, $letterSpacing: 0, $lineHeight: normal) {
+  $name: null;
+
+  @if $letterSpacing == 0 {
+    @if $lineHeight == 'normal' {
+      $name: #{$fontFamilyName}-#{$fontSize};
+
+      @include media-placeholder($name) {
+        font-family: $fontFamilyName;
+        font-size: pxToEm($fontSize);
+      }
+
+    } @else {
+      $name: #{$fontFamilyName}-#{$fontSize}-lh#{$lineHeight};
+
+      @include media-placeholder($name) {
+        font-family: $fontFamilyName;
+        font-size: pxToEm($fontSize);
+        line-height: #{$lineHeight}px;
+      }
+
+    }
+
+  } @else {
+    @if $lineHeight == 'normal' {
+      $name: #{$fontFamilyName}-#{$fontSize}-ls#{$letterSpacing};
+
+      @include media-placeholder($name) {
+        font-family: $fontFamilyName;
+        font-size: pxToEm($fontSize);
+        letter-spacing: letterSpacing($letterSpacing);
+      }
+
+    } @else {
+      $name: #{$fontFamilyName}-#{$fontSize}-ls#{$letterSpacing}-lh#{$lineHeight};
+
+      @include media-placeholder($name) {
+        font-family: $fontFamilyName;
+        font-size: pxToEm($fontSize);
+        letter-spacing: letterSpacing($letterSpacing);
+        line-height: #{$lineHeight}px;
+      }
+
+    }
+  }
+
+  @extend %#{$name}-#{$current-breakpoint};
+}

@@ -1,0 +1,31 @@
+.space {
+  @each $direction, $position in $positions {
+    @each $edge in map_get($positions, $direction) {
+      @each $separator-name, $separator in $separators {
+        &--outer-#{$edge}-#{$separator-name} {
+          margin-#{$edge}: $separator;
+        }
+
+        &--inner-#{$edge}-#{$separator-name} {
+          padding-#{$edge}: $separator;
+        }
+      }
+    }
+  }
+}
+
+.space--resp-margin {
+  margin-bottom: 4px;
+
+  @include respond-to(sm) {
+    margin-bottom: 8px;
+  }
+}
+
+.space--resp-col-pad {
+  padding: 6%;
+
+  @include respond-to(md) {
+    padding: 0 4%;
+  }
+}

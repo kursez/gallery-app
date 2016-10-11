@@ -1,0 +1,21 @@
+{
+  "browser": true,
+  "curly": true,
+  "eqeqeq": true,
+  "jquery": true,
+  "indent": 2,
+  "latedef": true,
+  "trailing": true,
+  "unused": true,
+  "undef": true,
+  "browserify": true,
+  "esversion": 6,
+  "globals": {
+    "console": true,
+    "globals": true,
+    "Modernizr": true,
+    "ScrollMagic": true,
+    "TimelineLite": true,
+    "Power2": true
+  }
+}

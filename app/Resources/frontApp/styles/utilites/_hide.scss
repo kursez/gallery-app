@@ -1,0 +1,87 @@
+/**
+* Hide Utility
+* @author Konstantinos Kataras
+*
+*/
+
+.hide {
+  display: none;
+
+  &--xxs {
+    @media (max-width: #{$screen-xs-min}) {
+      display: none !important;
+    }
+  }
+
+  &--xs {
+    @media (min-width: #{$screen-xs-min}) and (max-width: #{$screen-sm-min - 1px}) {
+      display: none !important;
+    }
+  }
+
+  &--sm {
+    @media (min-width: #{$screen-sm-min}) and (max-width: #{$screen-md-min - 1px}) {
+      display: none !important;
+    }
+  }
+
+  &--md {
+    @media (min-width: #{$screen-md-min}) and (max-width: #{$screen-lg-min - 1px}){
+      display: none !important;
+    }
+  }
+
+  &--lg {
+    @media (min-width: #{$screen-lg-min}) {
+      display: none !important;
+    }
+  }
+
+  &--xs-up {
+    @media (min-width: #{$screen-xs-min}) {
+      display: none !important;
+    }
+  }
+
+  &--sm-up {
+    @media (min-width: #{$screen-sm-min}) {
+      display: none !important;
+    }
+  }
+
+  &--md-up {
+    @media (min-width: #{$screen-md-min}) {
+      display: none !important;
+    }
+  }
+
+  &--lg-up {
+    @media (min-width: #{$screen-lg-min}) {
+      display: none !important;
+    }
+  }
+
+  &--xs-down {
+    @media (max-width: #{$screen-xs-min - 1px}) {
+      display: none !important;
+    }
+  }
+
+  &--sm-down {
+    @media (max-width: #{$screen-sm-min - 1px}) {
+      display: none !important;
+    }
+  }
+
+  &--md-down {
+    @media (max-width: #{$screen-md-min - 1px}) {
+      display: none !important;
+    }
+  }
+
+  &--lg-down {
+    @media (max-width: #{$screen-lg-min - 1px}) {
+      display: none !important;
+    }
+  }
+}

@@ -1,0 +1,106 @@
+/*
+ ** Setup - Variables
+ ** -----------------------------------------------------------------------------*/
+
+// Colors
+
+$color-white:            #FFFFFF !default;
+$color-black:            #000000 !default;
+
+$color-green:            #00B284 !default;
+$color-gray:             #AAA !default;
+
+$colors: (
+  white: $color-white,
+  black: $color-black,
+  green: $color-green,
+  gray: $color-gray
+);
+
+// Fonts
+
+$icon-font-path: "../fonts/";
+$font-arial: 'Arial', 'Helvetica Neue', Helvetica, sans-serif !default;
+$font-open-sans: 'open-sans' !default;
+$font-open-sans-italic: 'open-sans-italic' !default;
+
+$font-color:            $color-black !default;
+$font-family:           $font-open-sans !default;
+$font-size:             1.6em !default;
+$font-weight:           normal !default;
+$font-line-height:      normal !default;
+
+$icon-font-path: "../fonts/";
+
+$font-weights: (
+  300,
+  400,
+  600
+);
+
+$font-families: (
+  'opensans': $font-open-sans,
+)!default;
+
+// Container definitions
+
+$container-width: 1425px !default;
+$container-padding: 20px !default;
+
+$container-width-md: 600px !default;
+$container-width-lg: 1182px !default;
+
+
+// Z-indexes
+
+$zindex-base: 1 !default;
+
+// Breakpoint definitions
+
+$screen-md: 960px;
+$screen-md-min: 960px;
+
+$screen-lg: 1180px;
+$screen-lg-min: 1180px;
+
+$breakpoints: (
+  xs: $screen-xs-min,
+  sm: $screen-sm-min,
+  md: $screen-md-min,
+  lg: $screen-lg-min
+) !default;
+
+// Separators
+
+$separator-xxl:         200px !default;
+$separator-xl:          100px !default;
+$separator-lg:           60px !default;
+$separator-md:           30px !default;
+$separator-sm:           20px !default;
+$separator-xs:           15px !default;
+$separator-xxs:          10px !default;
+$separator-xxxs:          5px !default;
+
+$separators: (
+  xxl: $separator-xxl,
+  xl : $separator-xl,
+  lg : $separator-lg,
+  md : $separator-md,
+  sm : $separator-sm,
+  xs : $separator-xs,
+  xxs : $separator-xxs,
+  xxxs : $separator-xxxs
+);
+
+// Grid definitions
+
+$grid-columns:          12 !default;
+$grid-gutter-width:     15px !default;
+
+// Border radius
+
+$border-radius-base: 2px;
+
+// Ratios
+
+$ratios: ((1,1), (3,2), (4,3), (16,9)) !default;

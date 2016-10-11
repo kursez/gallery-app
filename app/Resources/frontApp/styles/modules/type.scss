@@ -1,0 +1,26 @@
+.type {
+  font-family: $font-family;
+  font-size: 14px;
+
+  &--title {
+    font-size: 20px;
+  }
+
+  @each $color-name, $color in $colors {
+    &--#{$color-name} {
+      color: $color;
+    }
+  }
+
+  @each $font-family-name, $font-family in $font-families {
+    &--#{$font-family-name} {
+      font-family: $font-family !important;
+    }
+  }
+
+  @each $font-weight in $font-weights {
+    &--#{$font-weight} {
+      font-weight: $font-weight;
+    }
+  }
+}

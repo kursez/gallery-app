@@ -1,0 +1,30 @@
+/**
+* Ratio - box
+* @author Konstantinos Kataras
+*
+*/
+
+// Ratios
+$ratios: () !default;
+
+.ratioBox {
+  display: block;
+  position: relative;
+  overflow: hidden;
+
+  @each $ratio in $ratios {
+    $padding: nth($ratio, 2) / nth($ratio, 1) * 100%;
+
+    &--#{nth($ratio, 1)}-#{nth($ratio, 2)} {
+      padding-top: $padding;
+    }
+  }
+  
+  .ratioBox-content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}

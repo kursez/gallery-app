@@ -1,0 +1,44 @@
+/* =========================================================================
+
+    Project: Gallery
+    Author: Konstantinos Kataras
+
+   ========================================================================= */
+
+// Variables
+@import "../../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/variables";
+@import 'setup/variables.scss';
+
+// Fonts
+@import "common/fonts";
+
+// Bootstrap
+@import "../../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
+@import "../../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/grid";
+
+// Mixins
+@import 'mixins/mixins.scss';
+
+// Functions
+@import 'functions/functions.scss';
+
+// Animations
+@import 'animations/animations.scss';
+
+// Placeholders
+@import "placeholders/clearfix";
+@import "placeholders/shadows";
+
+// Utilities
+@import "utilites/deco";
+@import "utilites/position";
+@import "utilites/space";
+
+// Common
+@import 'setup/normalize.scss';
+@import "common/base";
+@import "common/icons";
+
+//Modules
+@import "modules/container";
+@import "modules/type";
