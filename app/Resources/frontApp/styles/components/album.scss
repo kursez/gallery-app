@@ -1,4 +1,6 @@
 .album {
+  @extend %shadow-basic;
+
   height: 200px;
   background-color: $color-gray;
   background-size: cover;
@@ -6,8 +8,6 @@
   transition: opacity 0.1s linear;
   margin-bottom: $separator-md;
   position: relative;
-
-  @extend %shadow-basic;
 
   &:hover {
     opacity: 0.7;
@@ -28,12 +28,14 @@
   @extend .type;
   @extend .type--title-sm;
   @extend .type--white;
+  @extend %text-shadow-basic;
 }
 
 .album__count {
   @extend .type;
   @extend .type--text-sm;
   @extend .type--white;
+  @extend %text-shadow-basic;
 
   display: block;
 }

@@ -7,24 +7,30 @@ import ImagesView from './../views/imageCollectionView';
 import ImageCollection from './../collections/images';
 
 export default Marionette.Object.extend({
+  albumCollection: null,
+  albumsView: null,
+  imageCollection: null,
+  imagesView: null,
+
   initialize: function () {
     this.bodyView = this.getOption('mainRegion');
   },
 
   showAlbums: function() {
-    var collection,
-        view;
-
-    $.ajax({
-      method: 'GET',
-      url: routes.getAlbums(),
-      success: function(data) {
-        console.log(JSON.parse(data));
-        collection = new AlbumCollection(JSON.parse(data));
-        view = new AlbumsView({collection: collection});
-        this.bodyView.showView(view);
-      }.bind(this)
-    });
+    if (this.albumCollection === null) {
+      $.ajax({
+        method: 'GET',
+        url: routes.getAlbums(),
+        success: function(data) {
+          this.albumCollection = new AlbumCollection(JSON.parse(data));
+          this.albumsView = new AlbumsView({collection: this.albumCollection});
+          this.bodyView.showView(this.albumsView);
+        }.bind(this)
+      });
+    } else {
+      this.albumsView = new AlbumsView({collection: this.albumCollection});
+      this.bodyView.showView(this.albumsView);
+    }
   },
 
   showAlbum: function(id) {
@@ -46,9 +52,5 @@ export default Marionette.Object.extend({
   showAlbumPage: function(id, page) {
     // to do
     console.log('album page view', id, page);
-  },
-
-  onSelectEntry: function (e) {
-    console.log(e);
   }
 });
