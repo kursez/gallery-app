@@ -7,7 +7,8 @@ export default Marionette.Application.extend({
 
   onStart: function () {
     new Router({
-      initialData: this.getOption('initialData')
+      initialData: this.getOption('initialData'),
+      mainRegion: this
     });
 
     Backbone.history.start();

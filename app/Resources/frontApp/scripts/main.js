@@ -4,13 +4,25 @@
 **/
 
 import GalleryApp from './components/app';
-
-var data = [1, 2];
+import $ from 'jquery';
+import routes from './settings/routes'
 
 document.addEventListener('DOMContentLoaded', () => {
-  var app = new GalleryApp({
-    initialData: data}
-  );
+  var app;
 
-  app.start();
+  $.ajax({
+    method: 'GET',
+    url: routes.getAlbums(),
+    success: function(data) {
+      app = new GalleryApp({
+        initialData: JSON.parse(data)
+      });
+
+      console.log(JSON.parse(data));
+
+      app.start();
+    }
+  });
+
+
 });

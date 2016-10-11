@@ -1,6 +1,6 @@
-export default `<ul class="">
-                  <% _.each(albums, function(album) { %>
-                    <li><%=album %></li>
-                  <% }) %>
-                </ul>
+export default `<a href="album/<%=id %>">
+                  <div class="album">
+                    <%=name %>
+                  </div>
+                </a>
                `;
