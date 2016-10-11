@@ -32,7 +32,7 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/images", name="getImages")
+     * @Route("/images", name="getImages", condition="request.isXmlHttpRequest()")
      * @Method({"GET"})
      */
     public function getImagesAction()
@@ -51,7 +51,7 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/image/{id}", name="getImage")
+     * @Route("/image/{id}", name="getImage", condition="request.isXmlHttpRequest()")
      * @Method({"GET"})
      */
     public function getImageAction($id)
@@ -72,7 +72,7 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/image", name="postImage")
+     * @Route("/image", name="postImage", condition="request.isXmlHttpRequest()")
      * @Method({"POST"})
      */
     public function postImageAction()
@@ -114,7 +114,7 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/image/{id}", name="putImage")
+     * @Route("/image/{id}", name="putImage", condition="request.isXmlHttpRequest()")
      * @Method({"PUT"})
      */
     public function putImageAction($id)
@@ -140,7 +140,7 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/image/{id}", name="deleteImage")
+     * @Route("/image/{id}", name="deleteImage", condition="request.isXmlHttpRequest()")
      * @Method({"DELETE"})
      */
     public function deleteImageAction($id)
@@ -162,12 +162,12 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/albums", name="getAlbums")
+     * @Route("/albums", name="getAlbums", condition="request.isXmlHttpRequest()")
      * @Method({"GET"})
      */
     public function getAlbumsAction()
     {
-        $normalizer = $this->get('app.album_normalizer');
+        $normalizer = $this->get('app.albums_normalizer');
         $encoder = new JsonEncoder();
         $serializer = new Serializer(array($normalizer), array($encoder));
 
@@ -179,7 +179,7 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/album/{id}", name="getAlbum")
+     * @Route("/album/{id}", name="getAlbum", condition="request.isXmlHttpRequest()")
      * @Method({"GET"})
      */
     public function getAlbumAction($id)
@@ -198,7 +198,7 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/album", name="postAlbum")
+     * @Route("/album", name="postAlbum", condition="request.isXmlHttpRequest()")
      * @Method({"POST"})
      */
     public function postAlbumAction()
@@ -224,7 +224,7 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/album/{id}", name="putAlbum")
+     * @Route("/album/{id}", name="putAlbum", condition="request.isXmlHttpRequest()")
      * @Method({"PUT"})
      */
     public function putAlbumAction($id)
@@ -253,7 +253,7 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/album/{id}", name="deleteAlbum")
+     * @Route("/album/{id}", name="deleteAlbum", condition="request.isXmlHttpRequest()")
      * @Method({"DELETE"})
      */
     public function deleteAlbumAction($id)

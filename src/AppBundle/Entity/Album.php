@@ -32,7 +32,7 @@ class Album
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Image", mappedBy="album")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Image", mappedBy="album")
      */
     private $images;
 
@@ -80,7 +80,7 @@ class Album
      */
     public function getImages()
     {
-        return $this->images;
+        return $this->images->toArray();
     }
 
     /**

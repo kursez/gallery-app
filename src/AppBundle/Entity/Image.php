@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Entity\Album;
 
 /**
  * Image
@@ -39,7 +40,7 @@ class Image
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Album", inversedBy="images")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Album", inversedBy="images")
      * @ORM\JoinColumn(name="album_id", referencedColumnName="id")
      */
     protected $album;
