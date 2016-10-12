@@ -15,23 +15,22 @@
     opacity: 1;
     visibility: visible;
   }
+}
 
-  &--no-mobile {
-    display: none;
+.modal__close {
+  position: absolute;
+  top: 19px;
+  right: 20px;
+  color: $color-gray;
+  transition: opacity 0.2s linear;
+  cursor: pointer;
 
-    @include respond-to(md) {
-      display: block;
-    }
+  &:hover {
+    opacity: 0.8;
   }
 }
 
-.modal-close {
-  position: absolute;
-  top: 9px;
-  right: 10px;
-}
-
-.modal-body {
+.modal__body {
   margin: 10% auto;
   max-width: 500px;
   width: 100%;
@@ -43,17 +42,17 @@
   box-shadow: 0 0 5px 0 rgba(0,0,0,0.18);
 
   &--big {
-    max-width: 800px;
+    max-width: 500px;
   }
 }
 
-.modal-container {
+.modal__container {
   padding: $separator-md;
   background-color: $color-white;
   position: relative;
 
   input {
-    font-size: 20px;
+    font-size: 16px;
     border-radius: 0;
     border-bottom: 1px solid $color-gray;
     width: 100%;
@@ -63,18 +62,9 @@
   }
 }
 
-.modal-header {
+.modal__header {
   font-size: 40px;
   color: $color-black;
   font-weight: 500;
   letter-spacing: -2.25px;
-}
-
-.modal {
-  .link {
-    display: inline-block;
-    margin-top: $separator-md;
-    font-size: 20px;
-    margin-right: $separator-xs;
-  }
 }

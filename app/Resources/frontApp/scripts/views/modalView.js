@@ -11,11 +11,11 @@ export default Marionette.View.extend({
   addImageView: new AddImageView(),
 
   regions: {
-    'container': '.modal-container'
+    'container': '.modal__content'
   },
 
   events: {
-    'click': 'onClickEvent'
+    'click .modal__close': 'closeModal'
   },
 
   initialize: function () {
@@ -24,10 +24,6 @@ export default Marionette.View.extend({
     Backbone.history.on("all", function () {
       this.closeModal();
     }.bind(this));
-  },
-
-  onClickEvent: function () {
-    console.log('clicked');
   },
 
   openModal: function () {

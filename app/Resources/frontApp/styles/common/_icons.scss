@@ -41,22 +41,26 @@
   content: '\EA03';
 }
 
-.icon--menu::before {
+.icon--close::before {
   content: '\EA04';
 }
 
-.icon--minus::before {
+.icon--menu::before {
   content: '\EA05';
 }
 
-.icon--next::before {
+.icon--minus::before {
   content: '\EA06';
 }
 
-.icon--plus::before {
+.icon--next::before {
   content: '\EA07';
 }
 
-.icon--wheel::before {
+.icon--plus::before {
   content: '\EA08';
+}
+
+.icon--wheel::before {
+  content: '\EA09';
 }

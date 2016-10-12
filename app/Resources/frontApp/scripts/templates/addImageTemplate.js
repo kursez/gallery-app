@@ -4,7 +4,7 @@ export default `
   <div class="form-field">
     <input name="name" type="text" placeholder="Image name">
   </div>
-  <div class="form-field hidden">
+  <div class="form-field hide">
     <input name="album" type="text">
   </div>
   <div class="form-field">
