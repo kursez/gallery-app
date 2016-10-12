@@ -8,13 +8,15 @@ $color-white:            #FFFFFF !default;
 $color-black:            #000000 !default;
 
 $color-green:            #00B284 !default;
+$color-red:              #FF7777 !default;
 $color-gray:             #AAA !default;
 
 $colors: (
   white: $color-white,
   black: $color-black,
   green: $color-green,
-  gray: $color-gray
+  gray: $color-gray,
+  red : $color-red
 );
 
 // Fonts

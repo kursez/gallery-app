@@ -1,6 +1,6 @@
 export default `
 <h2 class="type type--title-md type--gray">Add Album</h2>
-<form class="form" action="#">
+<form class="form">
   <div class="form-field">
     <input name="name" type="text" placeholder="Image name">
   </div>

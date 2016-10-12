@@ -5,6 +5,7 @@ import $ from 'jquery';
 import template from './../templates/modalTemplate';
 import AddImageView from './../views/addImageView';
 import AddAlbumView from './../views/addAlbumView';
+import ErrorView from './../views/errorView.js';
 
 export default Marionette.View.extend({
   el: '#modal',
@@ -13,7 +14,8 @@ export default Marionette.View.extend({
   addAlbumView: new AddAlbumView(),
 
   regions: {
-    'container': '.modal__content'
+    'container': '.modal__content',
+    'error': '.modal__error'
   },
 
   events: {
@@ -34,5 +36,22 @@ export default Marionette.View.extend({
 
   closeModal: function () {
     $(this.el).removeClass('modal--open');
+  },
+
+  onChildviewCloseModal: function () {
+    this.closeModal();
+  },
+
+  onChildviewAddAlbum: function (data) {
+    this.triggerMethod('add:album', data);
+  },
+
+  onChildviewAddImage: function (data) {
+    this.triggerMethod('add:image', data);
+  },
+
+  onChildviewShowError: function (data) {
+    var errorView = new ErrorView({error: data.responseJSON});
+    this.showChildView('error', errorView);
   }
 });

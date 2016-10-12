@@ -1,0 +1,25 @@
+.form {
+  input {
+    font-size: 16px;
+    border-radius: 0;
+    border-bottom: 1px solid $color-gray;
+    width: 100%;
+    padding: $separator-md 0 $separator-xs;
+    outline: none;
+    color: $color-gray;
+
+    &[type="submit"] {
+      width: auto;
+      margin: $separator-sm auto 0 ;
+      cursor: pointer;
+      padding: $separator-xxxs $separator-sm $separator-xxxs;
+      border: 1px solid $color-gray;
+      transition: color 0.2s linear, opacity 0.2s linear;
+
+      &:hover {
+        color: $color-green;
+        opacity: 0.5;
+      }
+    }
+  }
+}

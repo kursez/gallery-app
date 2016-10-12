@@ -18,11 +18,9 @@ export default Marionette.View.extend({
   },
 
   onClickEvent: function (e) {
-
+    e.preventDefault();
     var form,
         data;
-
-    e.preventDefault();
 
     form = $(this.el);
     data = form.serialize();
@@ -31,14 +29,15 @@ export default Marionette.View.extend({
       method: 'POST',
       url: routes.postAlbum(),
       data: data,
-      success: function(data) {
-        this.triggerMethod('close:modal', this);
 
-        console.log(data);
+      success: function(data) {
+        this.triggerMethod('add:album', data);
+        this.triggerMethod('close:modal', this);
       }.bind(this),
+
       error: function(data) {
-        console.log(data);
-      }
+        this.triggerMethod('show:error', data);
+      }.bind(this)
     });
   }
 });

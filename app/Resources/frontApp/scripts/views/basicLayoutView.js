@@ -17,7 +17,6 @@ export default Marionette.View.extend({
     options: '#options'
   },
 
-
   initialize: function () {
     this.render();
   },
@@ -33,8 +32,6 @@ export default Marionette.View.extend({
   },
 
   onShowImages: function (data) {
-    console.log(data);
-
     var titleView = new TitleView({model: {title: 'Album: ' + data.name }}),
         imageView = new ImagesView({collection: this.getOption('imageCollection')}),
         optionsView = new OptionsView({'data-options-action': data.id});
@@ -46,6 +43,14 @@ export default Marionette.View.extend({
 
   onChildviewCloseModal: function() {
     this.modal.openModal();
+  },
+
+  onChildviewAddAlbum: function (data) {
+
+  },
+
+  onChildviewAddImage: function (data) {
+
   },
 
   onChildviewOpenModal: function(child) {

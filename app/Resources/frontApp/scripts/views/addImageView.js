@@ -18,10 +18,9 @@ export default Marionette.View.extend({
   },
 
   onClickEvent: function (e) {
+    e.preventDefault();
     var form,
         data;
-
-    e.preventDefault();
 
     form = $(this.el);
     form.find('input[name="album"]').val(1);
@@ -29,18 +28,17 @@ export default Marionette.View.extend({
 
     $.ajax({
       method: 'POST',
-      cache: false,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
       url: routes.postImage(),
       data: data,
+
       success: function(data) {
-        console.log(this);
+        this.triggerMethod('add:album', data);
+        this.triggerMethod('close:modal', this);
       }.bind(this),
+
       error: function(data) {
-        console.log(data);
-      }
+        this.triggerMethod('show:error', data);
+      }.bind(this)
     });
   }
 });
