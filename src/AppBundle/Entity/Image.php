@@ -3,7 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Entity\Album;
 
 /**
@@ -26,7 +25,6 @@ class Image
     /**
      * @var string
      *
-     * @Assert\NotBlank()
      * @ORM\Column(name="src", type="string")
      */
     private $src;
@@ -34,7 +32,6 @@ class Image
     /**
      * @var string
      *
-     * @Assert\NotBlank()
      * @ORM\Column(name="name", type="string")
      */
     private $name;

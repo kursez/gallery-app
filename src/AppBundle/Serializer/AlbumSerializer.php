@@ -12,7 +12,7 @@ class AlbumSerializer
 {
   private $normalizer;
 
-  private function __construct($normalizer) {
+  public function __construct($normalizer) {
     $this->normalizer = $normalizer;
   }
 

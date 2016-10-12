@@ -83,7 +83,7 @@ class MainController extends Controller
             return new JsonResponse($this->get('app.image_serializer')->serialize($image));
         }
 
-        return new JsonResponse($this->get('app.form_errors_to_json')->serialize($form->getErrors(true)), 400);
+        return new JsonResponse($this->get('app.form_errors_to_json')->getErrors($form->getErrors(true)), 400);
     }
 
     /**
@@ -93,7 +93,7 @@ class MainController extends Controller
     public function putImageAction(Request $request)
     {
         $image = new Image();
-        $form = $this->createForm($this->get('app.create_image_type'), $image);
+        $form = $this->createForm($this->get('app.edit_image_type'), $image);
         $form->submit($request);
 
         if ($form->isValid()) {
@@ -103,7 +103,7 @@ class MainController extends Controller
 
             return new JsonResponse($this->get('app.image_serializer')->serialize($image));
         } else {
-            return new JsonResponse($this->get('app.form_errors_to_json')->serialize($form->getErrors(true)), 400);
+            return new JsonResponse($this->get('app.form_errors_to_json')->getErrors($form->getErrors(true)), 400);
         }
     }
 
@@ -113,11 +113,12 @@ class MainController extends Controller
      */
     public function deleteImageAction(Image $image)
     {
+        $id = $image->getId();
         $em = $this->getDoctrine()->getManager();
         $em->remove($image);
         $em->flush();
 
-        return new JsonResponse('Image with id: '. $image->getId() . ' successfully deleted');
+        return new JsonResponse('Image with id: '. $id . ' successfully deleted');
     }
 
     /**
@@ -150,7 +151,7 @@ class MainController extends Controller
     {
         $album = new Album();
         $form = $this->createForm($this->get('app.create_album_type'), $album);
-        $form->submit($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -159,7 +160,7 @@ class MainController extends Controller
 
             return new JsonResponse($this->get('app.albums_serializer')->serialize($album));
         } else {
-            return new JsonResponse($this->get('app.form_errors_to_json')->serialize($form->getErrors(true)), 400);
+            return new JsonResponse($this->get('app.form_errors_to_json')->getErrors($form->getErrors(true)), 400);
         }
     }
 
@@ -167,12 +168,11 @@ class MainController extends Controller
      * @Route("/album/{id}", name="putAlbum")
      * @Method({"PUT"})
      */
-    public function putAlbumAction($id)
+    public function putAlbumAction($id, Request $request)
     {
-        $request = $this->get('request');
         $album = new Album();
         $form = $this->createForm($this->get('app.create_album_type'), $album);
-        $form->submit($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -192,10 +192,11 @@ class MainController extends Controller
      */
     public function deleteAlbumAction(Album $album)
     {
+        $id = $album->getId();
         $em = $this->getDoctrine()->getManager();
         $em->remove($album);
         $em->flush();
 
-        return new JsonResponse('Album with id: '. $album->getId() . ' successfully deleted');
+        return new JsonResponse('Album with id: '. $id . ' successfully deleted');
     }
 }

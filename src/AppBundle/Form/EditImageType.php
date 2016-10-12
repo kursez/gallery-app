@@ -26,13 +26,7 @@ class EditImageType extends AbstractType
             'max' => 250,
             'maxMessage' => 'Name must have no more than 250 characters'
         ])
-      ]])
-      ->add('album', EntityType::class, [
-        'class' => 'AppBundle:Album',
-        'constraints' =>
-            [
-                new NotBlank(['message' => 'Name cannot be empty']),
-            ]]);
+      ]]);
   }
 
   /**
