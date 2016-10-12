@@ -5,11 +5,41 @@ services:
         class: AppBundle\Services\FileUploader
         arguments: ['%images_directory%']
 
+    app.form_errors_to_json:
+        class: AppBundle\Services\FormErrorsToJson
+
     app.albums_normalizer:
-            class: AppBundle\Serializer\AlbumsNormalizer
+        class: AppBundle\Serializer\AlbumsNormalizer
 
     app.album_normalizer:
-            class: AppBundle\Serializer\AlbumNormalizer
+        class: AppBundle\Serializer\AlbumNormalizer
 
     app.image_normalizer:
-            class: AppBundle\Serializer\ImageNormalizer
+        class: AppBundle\Serializer\ImageNormalizer
+
+    app.albums_serializer:
+        class: AppBundle\Serializer\AlbumsSerializer
+        arguments: [app.albums_normalizer]
+
+    app.album_serializer:
+        class: AppBundle\Serializer\AlbumSerializer
+        arguments: [app.album_normalizer]
+
+    app.image_serializer:
+        class: AppBundle\Serializer\ImageSerializer
+        arguments: [app.image_normalizer]
+
+    app.create_album_type:
+        class: AppBundle\Form\CreateAlbumType
+        tags:
+            - { name: form.type, alias: create_album }
+
+    app.create_image_type:
+        class: AppBundle\Form\CreateImageType
+        tags:
+            - { name: form.type, alias: create_image }
+
+    app.edit_image_type:
+        class: AppBundle\Form\EditImageType
+        tags:
+            - { name: form.type, alias: edit_image }

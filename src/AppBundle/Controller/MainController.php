@@ -32,224 +32,154 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/images", name="getImages", condition="request.isXmlHttpRequest()")
+     * @Route("/images", name="getImages")
      * @Method({"GET"})
      */
-    public function getImagesAction()
+    public function getImagesAction(Request $request)
     {
-        $normalizer = $this->get('app.image_normalizer');
-        $encoder = new JsonEncoder();
-        $serializer = new Serializer(array($normalizer), array($encoder));
-
         $images = $this->getDoctrine()
             ->getRepository('AppBundle:Image')
             ->findAll();
 
-        $json = $serializer->serialize($images, 'json');
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $images,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 10)
+        );
 
-        return new JsonResponse($json);
+        return new JsonResponse($this->get('app.image_serializer')->serialize($pagination->getItems()));
     }
 
     /**
-     * @Route("/image/{id}", name="getImage", condition="request.isXmlHttpRequest()")
+     * @Route("/image/{id}", name="getImage")
      * @Method({"GET"})
      */
-    public function getImageAction($id)
+    public function getImageAction(Image $image)
     {
-        $normalizer = $this->get('app.image_normalizer');
-        $encoder = new JsonEncoder();
-        $serializer = new Serializer(array($normalizer), array($encoder));
-
-        $image = $this->getDoctrine()
-            ->getRepository('AppBundle:Image')
-            ->findOneById($id);
-
-        if ($image !== null) {
-            return new JsonResponse($serializer->serialize($image, 'json'));
-        } else {
-            return new JsonResponse('No album with id: ' . $id, 400);
-        }
+        return new JsonResponse($this->get('app.image_serializer')->serialize($image));
     }
 
     /**
-     * @Route("/image", name="postImage", condition="request.isXmlHttpRequest()")
+     * @Route("/image", name="postImage")
      * @Method({"POST"})
      */
-    public function postImageAction()
+    public function postImageAction(Request $request)
     {
-        $request = $this->get('request');
+        $image = new Image();
+        $form = $this->createForm($this->get('app.create_image_type'), $image);
+        $form->submit($request);
 
-        $albumId = $request->request->get('album');
-        $name = $request->request->get('name');
-        $file = $request->files->get('file');
+        if ($form->isValid()) {
+            $uploader = $this->get('app.image_uploader');
+            $fileName = $uploader->upload($form->get('src')->getData());
 
-//        var_dump($albumId);
-//        var_dump($name);
-//        var_dump($file);
+            $image->setSrc($uploader->getFolder() . '/' . $fileName);
 
-        if ($name !== null && $albumId !== null && $file !== null && strlen($name) > 0 && strlen($albumId) > 0) {
-            $album = $this->getDoctrine()
-                ->getRepository('AppBundle:Album')
-                ->findOneById($albumId);
-
-            if ($album !== null ) {
-                $image = new Image();
-
-                $uploader = $this->get('app.image_uploader');
-                $fileName = $uploader->upload($file);
-
-                $image->setName($name);
-                $image->setAlbum($album);
-                $image->setSrc($uploader->getFolder() . '/' . $fileName);
-
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($image);
-                $em->flush();
-
-                $normalizer = $this->get('app.image_normalizer');
-                $encoder = new JsonEncoder();
-                $serializer = new Serializer(array($normalizer), array($encoder));
-
-                return new JsonResponse($serializer->serialize($image, 'json'));
-            }
-        }
-
-        return new JsonResponse(($file == null) ? 'OXI LEME' : 'NAI', 400);
-    }
-
-    /**
-     * @Route("/image/{id}", name="putImage", condition="request.isXmlHttpRequest()")
-     * @Method({"PUT"})
-     */
-    public function putImageAction($id)
-    {
-        $normalizer = $this->get('app.image_normalizer');
-        $encoder = new JsonEncoder();
-        $serializer = new Serializer(array($normalizer), array($encoder));
-
-        $name = $this->get('request')->request->get('name');
-
-        $image = $this->getDoctrine()
-            ->getRepository('AppBundle:Image')
-            ->findOneById($id);
-
-        $image->setName($name);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($image);
-        $em->flush();
-
-        $json = $serializer->serialize($image, 'json');
-
-        return new JsonResponse($json);
-    }
-
-    /**
-     * @Route("/image/{id}", name="deleteImage", condition="request.isXmlHttpRequest()")
-     * @Method({"DELETE"})
-     */
-    public function deleteImageAction($id)
-    {
-        $image = $this->getDoctrine()
-            ->getRepository('AppBundle:Image')
-            ->findOneById($id);
-
-        if ($image !== null) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($image);
+            $em->persist($image);
             $em->flush();
 
-            return new JsonResponse('Image with id: '. $id . ' successfully deleted');
+            return new JsonResponse($this->get('app.image_serializer')->serialize($image));
+        }
 
+        return new JsonResponse($this->get('app.form_errors_to_json')->serialize($form->getErrors(true)), 400);
+    }
+
+    /**
+     * @Route("/image/{id}", name="putImage")
+     * @Method({"PUT"})
+     */
+    public function putImageAction(Request $request)
+    {
+        $image = new Image();
+        $form = $this->createForm($this->get('app.create_image_type'), $image);
+        $form->submit($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($image);
+            $em->flush();
+
+            return new JsonResponse($this->get('app.image_serializer')->serialize($image));
         } else {
-            return new JsonResponse('No image with id: ' . $id, 400);
+            return new JsonResponse($this->get('app.form_errors_to_json')->serialize($form->getErrors(true)), 400);
         }
     }
 
     /**
-     * @Route("/albums", name="getAlbums", condition="request.isXmlHttpRequest()")
+     * @Route("/image/{id}", name="deleteImage")
+     * @Method({"DELETE"})
+     */
+    public function deleteImageAction(Image $image)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($image);
+        $em->flush();
+
+        return new JsonResponse('Image with id: '. $image->getId() . ' successfully deleted');
+    }
+
+    /**
+     * @Route("/albums", name="getAlbums")
      * @Method({"GET"})
      */
     public function getAlbumsAction()
     {
-        $normalizer = $this->get('app.albums_normalizer');
-        $encoder = new JsonEncoder();
-        $serializer = new Serializer(array($normalizer), array($encoder));
-
         $albums = $this->getDoctrine()
             ->getRepository('AppBundle:Album')
             ->findAll();
 
-        return new JsonResponse($serializer->serialize($albums, 'json'));
+        return new JsonResponse($this->get('app.albums_serializer')->serialize($albums));
     }
 
     /**
-     * @Route("/album/{id}", name="getAlbum", condition="request.isXmlHttpRequest()")
+     * @Route("/album/{id}", name="getAlbum")
      * @Method({"GET"})
      */
-    public function getAlbumAction($id)
+    public function getAlbumAction(Album $album)
     {
-        $album = $this->getDoctrine()->getRepository('AppBundle:Album')->findOneById($id);
-
-        if ($album !== null) {
-            $normalizer = $this->get('app.album_normalizer');
-            $encoder = new JsonEncoder();
-            $serializer = new Serializer(array($normalizer), array($encoder));
-
-            return new JsonResponse($serializer->serialize($album, 'json'));
-        } else {
-            return new JsonResponse('No album with id: ' . $id, 400);
-        }
+        return new JsonResponse($this->get('app.album_serializer')->serialize($album));
     }
 
     /**
-     * @Route("/album", name="postAlbum", condition="request.isXmlHttpRequest()")
+     * @Route("/album", name="postAlbum")
      * @Method({"POST"})
      */
-    public function postAlbumAction()
+    public function postAlbumAction(Request $request)
     {
-        $name = $this->get('request')->request->get('name');
+        $album = new Album();
+        $form = $this->createForm($this->get('app.create_album_type'), $album);
+        $form->submit($request);
 
-        if ($name !== null && strlen($name) > 0) {
+        if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $album = new Album();
-            $album->setName($name);
             $em->persist($album);
             $em->flush();
 
-            $normalizer = $this->get('app.albums_normalizer');
-            $encoder = new JsonEncoder();
-            $serializer = new Serializer(array($normalizer), array($encoder));
-
-            return new JsonResponse($serializer->serialize($album, 'json'));
-
+            return new JsonResponse($this->get('app.albums_serializer')->serialize($album));
         } else {
-            return new JsonResponse('Name cannot be empty', 400);
+            return new JsonResponse($this->get('app.form_errors_to_json')->serialize($form->getErrors(true)), 400);
         }
     }
 
     /**
-     * @Route("/album/{id}", name="putAlbum", condition="request.isXmlHttpRequest()")
+     * @Route("/album/{id}", name="putAlbum")
      * @Method({"PUT"})
      */
     public function putAlbumAction($id)
     {
-        $name = $this->get('request')->request->get('name');
+        $request = $this->get('request');
+        $album = new Album();
+        $form = $this->createForm($this->get('app.create_album_type'), $album);
+        $form->submit($request);
 
-        if ($name !== null && strlen($name) > 0) {
-            $album = $this->getDoctrine()
-                ->getRepository('AppBundle:Album')
-                ->findOneById($id);
-
-            $album->setName($name);
+        if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($album);
             $em->flush();
 
-            $normalizer = $this->get('app.albums_normalizer');
-            $encoder = new JsonEncoder();
-            $serializer = new Serializer(array($normalizer), array($encoder));
-
-            return new JsonResponse($serializer->serialize($album, 'json'));
+            return new JsonResponse($this->get('app.albums_serializer')->serialize($album));
 
         } else {
             return new JsonResponse('Name cannot be empty', 400);
@@ -257,24 +187,15 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/album/{id}", name="deleteAlbum", condition="request.isXmlHttpRequest()")
+     * @Route("/album/{id}", name="deleteAlbum")
      * @Method({"DELETE"})
      */
-    public function deleteAlbumAction($id)
+    public function deleteAlbumAction(Album $album)
     {
-        $album = $this->getDoctrine()
-            ->getRepository('AppBundle:Album')
-            ->findOneById($id);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($album);
+        $em->flush();
 
-        if ($album) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($album);
-            $em->flush();
-
-            return new JsonResponse('Album with id: '. $id . ' successfully deleted');
-
-        } else {
-            return new JsonResponse('No album with id: ' . $id, 400);
-        }
+        return new JsonResponse('Album with id: '. $album->getId() . ' successfully deleted');
     }
 }
