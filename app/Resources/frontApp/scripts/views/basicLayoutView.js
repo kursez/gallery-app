@@ -25,17 +25,19 @@ export default Marionette.View.extend({
   onShowAlbums: function () {
     var titleView = new TitleView({model: {title: 'Albums'}}),
         albumsView = new AlbumsView({collection: this.getOption('albumCollection')}),
-        optionsView = new OptionsView({'data-action': 'add-album'});
+        optionsView = new OptionsView({'data-options-action': ''});
 
     this.showChildView('title', titleView);
     this.showChildView('content', albumsView);
     this.showChildView('options', optionsView);
   },
 
-  onShowImages: function (title) {
-    var titleView = new TitleView({model: {title: 'Album: ' + title }}),
+  onShowImages: function (data) {
+    console.log(data);
+
+    var titleView = new TitleView({model: {title: 'Album: ' + data.name }}),
         imageView = new ImagesView({collection: this.getOption('imageCollection')}),
-        optionsView = new OptionsView({'data-action': 'add-image'});
+        optionsView = new OptionsView({'data-options-action': data.id});
 
     this.showChildView('title', titleView);
     this.showChildView('content', imageView);
@@ -47,9 +49,18 @@ export default Marionette.View.extend({
   },
 
   onChildviewOpenModal: function(child) {
-    console.log(child);
+    var attr = child.$el.attr('data-options-action');
 
-    this.modal.showChildView('container', this.modal.addImageView);
-    this.modal.openModal();
+    if (typeof attr !== 'undefined') {
+      if (attr === '') {
+        this.modal.showChildView('container', this.modal.addAlbumView);
+        this.modal.openModal();
+
+      } else {
+        this.modal.showChildView('container', this.modal.addImageView);
+        this.modal.openModal();
+
+      }
+    }
   }
 });

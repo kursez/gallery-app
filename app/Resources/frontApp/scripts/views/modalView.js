@@ -4,11 +4,13 @@ import _ from 'underscore';
 import $ from 'jquery';
 import template from './../templates/modalTemplate';
 import AddImageView from './../views/addImageView';
+import AddAlbumView from './../views/addAlbumView';
 
 export default Marionette.View.extend({
   el: '#modal',
   template: _.template(template),
   addImageView: new AddImageView(),
+  addAlbumView: new AddAlbumView(),
 
   regions: {
     'container': '.modal__content'

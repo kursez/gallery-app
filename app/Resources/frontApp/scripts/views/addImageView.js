@@ -2,7 +2,7 @@ import Marionette from 'backbone.marionette';
 import _ from 'underscore';
 import $ from 'jquery';
 import routes from './../settings/routes';
-import template from './../templates/addImageTemplate.js';
+import template from './../templates/addImageTemplate';
 
 export default Marionette.View.extend({
   tagName: 'form',

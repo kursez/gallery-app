@@ -8,7 +8,7 @@ export default Marionette.View.extend({
 
   attributes: function () {
     return {
-      'data-action': this.getOption('data-action')
+      'data-options-action': this.getOption('data-options-action')
     };
   },
 

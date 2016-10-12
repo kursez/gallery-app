@@ -2,7 +2,7 @@ import Marionette from 'backbone.marionette';
 import _ from 'underscore';
 import $ from 'jquery';
 import routes from './../settings/routes';
-import template from './../templates/addImageTemplate.js';
+import template from './../templates/addAlbumTemplate';
 
 export default Marionette.View.extend({
   tagName: 'form',
@@ -17,7 +17,8 @@ export default Marionette.View.extend({
     'click input[type="submit"]': 'onClickEvent'
   },
 
-  onClickEvent: function () {
+  onClickEvent: function (e) {
+
     var form,
         data;
 
@@ -28,16 +29,16 @@ export default Marionette.View.extend({
 
     $.ajax({
       method: 'POST',
-      url: routes.postImage(),
+      url: routes.postAlbum(),
       data: data,
       success: function(data) {
-        console.log(this);
+        this.triggerMethod('close:modal', this);
+
+        console.log(data);
       }.bind(this),
       error: function(data) {
         console.log(data);
       }
     });
-
-    this.triggerMethod('close:modal', this);
   }
 });

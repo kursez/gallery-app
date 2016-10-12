@@ -35,7 +35,7 @@ export default Marionette.Object.extend({
 
         this.imageCollection = new ImageCollection(data.images);
         this.appLayout.options.imageCollection = this.imageCollection;
-        this.appLayout.triggerMethod('show:images', data.name);
+        this.appLayout.triggerMethod('show:images', data);
       }.bind(this)
     });
   },
