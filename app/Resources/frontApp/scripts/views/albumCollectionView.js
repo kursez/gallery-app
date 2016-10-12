@@ -1,11 +1,17 @@
 import Marionette from 'backbone.marionette';
 import Backbone from 'backbone';
-import Album from './../views/albumView';
+import AlbumView from './../views/albumView';
 
 export default Marionette.CollectionView.extend({
   tagName: 'ul',
-  childView: Album,
+  childView: AlbumView,
   className: 'row',
+
+  regions: {
+    'title': '#title',
+    'content': '#content'
+  },
+
   onChildviewSelectEntry: function(child) {
     this.triggerMethod('select:entry', child.model);
   },

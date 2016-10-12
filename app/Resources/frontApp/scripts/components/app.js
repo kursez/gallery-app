@@ -6,10 +6,7 @@ export default Marionette.Application.extend({
   region: '#app',
 
   onStart: function () {
-    new Router({
-      mainRegion: this
-    });
-
+    new Router();
     Backbone.history.start();
   }
 });

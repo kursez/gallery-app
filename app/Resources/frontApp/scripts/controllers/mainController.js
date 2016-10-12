@@ -1,20 +1,14 @@
 import Marionette from 'backbone.marionette';
 import $ from 'jquery';
 import routes from './../settings/routes';
-import AlbumsView from './../views/albumCollectionView';
 import AlbumCollection from './../collections/albums';
-import ImagesView from './../views/imageCollectionView';
 import ImageCollection from './../collections/images';
+import BasicLayoutView from './../views/basicLayoutView';
 
 export default Marionette.Object.extend({
   albumCollection: null,
-  albumsView: null,
   imageCollection: null,
-  imagesView: null,
-
-  initialize: function () {
-    this.bodyView = this.getOption('mainRegion');
-  },
+  appLayout: new BasicLayoutView(),
 
   showAlbums: function () {
     if (this.albumCollection === null) {
@@ -23,64 +17,23 @@ export default Marionette.Object.extend({
         url: routes.getAlbums(),
         success: function(data) {
           this.albumCollection = new AlbumCollection(JSON.parse(data));
-          this.albumsView = new AlbumsView({collection: this.albumCollection});
-          this.bodyView.showView(this.albumsView);
+          this.appLayout.options.albumCollection = this.albumCollection;
+          this.appLayout.triggerMethod('show:albums');
         }.bind(this)
       });
     } else {
-      this.albumsView = new AlbumsView({collection: this.albumCollection});
-      this.bodyView.showView(this.albumsView);
+      this.appLayout.triggerMethod('show:albums');
     }
   },
 
-  createAlbum: function () {
-    $.ajax({
-      method: 'POST',
-      url: routes.getAlbums(),
-      success: function(data) {
-        this.albumCollection = new AlbumCollection(JSON.parse(data));
-        this.albumsView = new AlbumsView({collection: this.albumCollection});
-        this.bodyView.showView(this.albumsView);
-      }.bind(this)
-    });
-  },
-
-  editAlbum: function () {
-    $.ajax({
-      method: 'GET',
-      url: routes.getAlbums(),
-      success: function(data) {
-        this.albumCollection = new AlbumCollection(JSON.parse(data));
-        this.albumsView = new AlbumsView({collection: this.albumCollection});
-        this.bodyView.showView(this.albumsView);
-      }.bind(this)
-    });
-  },
-
-  deleteAlbum: function () {
-    $.ajax({
-      method: 'GET',
-      url: routes.getAlbums(),
-      success: function(data) {
-        this.albumCollection = new AlbumCollection(JSON.parse(data));
-        this.albumsView = new AlbumsView({collection: this.albumCollection});
-        this.bodyView.showView(this.albumsView);
-      }.bind(this)
-    });
-  },
-
   showAlbum: function (id) {
-    var collection,
-        view;
-
     $.ajax({
       method: 'GET',
       url: routes.getAlbum(id),
       success: function(data) {
-        console.log(JSON.parse(data).images);
-        collection = new ImageCollection(JSON.parse(data).images);
-        view = new ImagesView({collection: collection});
-        this.bodyView.showView(view);
+        this.imageCollection = new ImageCollection(JSON.parse(data).images);
+        this.appLayout.options.imageCollection = this.imageCollection;
+        this.appLayout.triggerMethod('show:images');
       }.bind(this)
     });
   },

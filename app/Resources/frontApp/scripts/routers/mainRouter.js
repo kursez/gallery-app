@@ -8,8 +8,6 @@ export default Marionette.AppRouter.extend({
     'album/:id/page/:page': 'showAlbumPage'
   },
   initialize: function() {
-    this.controller = new Controller({
-      mainRegion: this.getOption('mainRegion')
-    });
+    this.controller = new Controller();
   }
 });
