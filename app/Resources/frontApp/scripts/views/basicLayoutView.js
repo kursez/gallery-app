@@ -6,6 +6,7 @@ import ImagesView from './../views/imageCollectionView';
 import TitleView from './../views/titleView';
 import OptionsView from './../views/optionsView';
 import ModalView from './../views/modalView';
+import AlbumModal from './../models/album.js';
 
 export default Marionette.View.extend({
   el: '#app',
@@ -49,11 +50,32 @@ export default Marionette.View.extend({
   },
 
   onChildviewAddAlbum: function (data) {
-    console.log(data);
+    var albumModel = new AlbumModal(JSON.parse(data)),
+        albumsView;
+
+    this.getOption('albumCollection').add(albumModel);
+    albumsView = new AlbumsView({collection: this.getOption('albumCollection')});
+    this.showChildView('content', albumsView);
+  },
+
+  onChildviewRemoveAlbum: function (id) {
+    var albumsView;
+
+    this.getOption('albumCollection');
+    albumsView = new AlbumsView({collection: this.getOption('albumCollection')});
+    this.showChildView('content', albumsView);
+  },
+
+  onChildviewEditAlbum: function (id, name) {
+    var albumsView;
+
+    this.getOption('albumCollection');
+    albumsView = new AlbumsView({collection: this.getOption('albumCollection')});
+    this.showChildView('content', albumsView);
   },
 
   onChildviewAddImage: function (data) {
-
+    // to do
   },
 
   onChildviewOpenModal: function(child) {

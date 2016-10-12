@@ -216,7 +216,7 @@ class MainController extends Controller
             $em->persist($album);
             $em->flush();
 
-            $normalizer = $this->get('app.album_normalizer');
+            $normalizer = $this->get('app.albums_normalizer');
             $encoder = new JsonEncoder();
             $serializer = new Serializer(array($normalizer), array($encoder));
 
@@ -245,7 +245,7 @@ class MainController extends Controller
             $em->persist($album);
             $em->flush();
 
-            $normalizer = $this->get('app.album_normalizer');
+            $normalizer = $this->get('app.albums_normalizer');
             $encoder = new JsonEncoder();
             $serializer = new Serializer(array($normalizer), array($encoder));
 

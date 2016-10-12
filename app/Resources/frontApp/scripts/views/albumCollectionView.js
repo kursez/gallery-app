@@ -16,4 +16,3 @@ export default Marionette.CollectionView.extend({
     Backbone.history.navigate('album/' + album.model.attributes.id , true);
   }
 });
-

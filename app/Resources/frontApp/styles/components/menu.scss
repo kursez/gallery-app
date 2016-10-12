@@ -1,11 +1,7 @@
 .menu {
+  display: block;
   position: absolute;
-  z-index: 3;
-
-  &--right {
-    right: 10px;
-    top: 10px;
-  }
+  right: 0;
 }
 
 .menu__icon {
@@ -17,6 +13,7 @@
 .menu__list {
   position: absolute;
   top: 100%;
+  right: 0;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease-in-out;

@@ -42,3 +42,10 @@
 
   display: block;
 }
+
+.album__menu {
+  position: absolute;
+  z-index: 3;
+  right: 10px;
+  top: 10px;
+}
