@@ -8,7 +8,8 @@ import AddAlbumView from './../views/addAlbumView';
 import ErrorView from './../views/errorView.js';
 
 export default Marionette.View.extend({
-  el: '#modal',
+  tagName: 'div',
+  className: 'modal__body modal__body--big',
   template: _.template(template),
   addImageView: new AddImageView(),
   addAlbumView: new AddAlbumView(),
@@ -23,19 +24,17 @@ export default Marionette.View.extend({
   },
 
   initialize: function () {
-    this.render();
-
     Backbone.history.on("all", function () {
       this.closeModal();
     }.bind(this));
   },
 
   openModal: function () {
-    $(this.el).addClass('modal--open');
+    $('#modal').addClass('modal--open');
   },
 
   closeModal: function () {
-    $(this.el).removeClass('modal--open');
+    $('#modal').removeClass('modal--open');
   },
 
   onChildviewCloseModal: function () {

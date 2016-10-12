@@ -14,11 +14,14 @@ export default Marionette.View.extend({
   regions: {
     title: '#title',
     content: '#content',
-    options: '#options'
+    options: '#options',
+    modal: '#modal'
   },
 
   initialize: function () {
     this.render();
+
+    this.showChildView('modal', this.modal);
   },
 
   onShowAlbums: function () {
@@ -46,7 +49,7 @@ export default Marionette.View.extend({
   },
 
   onChildviewAddAlbum: function (data) {
-
+    console.log(data);
   },
 
   onChildviewAddImage: function (data) {
