@@ -5,7 +5,7 @@ import Image from './../models/image';
 
 export default Marionette.View.extend({
   tagName: 'li',
-  className: 'col-xs-12 col-sm-6 col-md-4',
+  className: 'col-xs-12 col-sm-6 col-md-4 image',
   template: _.template(template),
   model: Image,
   triggers: {

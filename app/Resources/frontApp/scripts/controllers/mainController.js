@@ -16,7 +16,7 @@ export default Marionette.Object.extend({
     this.bodyView = this.getOption('mainRegion');
   },
 
-  showAlbums: function() {
+  showAlbums: function () {
     if (this.albumCollection === null) {
       $.ajax({
         method: 'GET',
@@ -33,7 +33,43 @@ export default Marionette.Object.extend({
     }
   },
 
-  showAlbum: function(id) {
+  createAlbum: function () {
+    $.ajax({
+      method: 'POST',
+      url: routes.getAlbums(),
+      success: function(data) {
+        this.albumCollection = new AlbumCollection(JSON.parse(data));
+        this.albumsView = new AlbumsView({collection: this.albumCollection});
+        this.bodyView.showView(this.albumsView);
+      }.bind(this)
+    });
+  },
+
+  editAlbum: function () {
+    $.ajax({
+      method: 'GET',
+      url: routes.getAlbums(),
+      success: function(data) {
+        this.albumCollection = new AlbumCollection(JSON.parse(data));
+        this.albumsView = new AlbumsView({collection: this.albumCollection});
+        this.bodyView.showView(this.albumsView);
+      }.bind(this)
+    });
+  },
+
+  deleteAlbum: function () {
+    $.ajax({
+      method: 'GET',
+      url: routes.getAlbums(),
+      success: function(data) {
+        this.albumCollection = new AlbumCollection(JSON.parse(data));
+        this.albumsView = new AlbumsView({collection: this.albumCollection});
+        this.bodyView.showView(this.albumsView);
+      }.bind(this)
+    });
+  },
+
+  showAlbum: function (id) {
     var collection,
         view;
 
@@ -49,7 +85,7 @@ export default Marionette.Object.extend({
     });
   },
 
-  showAlbumPage: function(id, page) {
+  showAlbumPage: function (id, page) {
     // to do
     console.log('album page view', id, page);
   }

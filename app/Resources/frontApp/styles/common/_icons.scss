@@ -4,11 +4,11 @@
 
 @font-face {
   font-family: 'iconfont';
-  src: font('iconfont.eot');
-  src: font('iconfont.eot?#iefix') format('eot'),
-       font('iconfont.woff') format('woff'),
-       font('iconfont.woff2') format('woff2'),
-       font('iconfont.ttf') format('truetype');
+  src: url('../fonts/iconfont.eot');
+  src: url('../fonts/iconfont.eot?#iefix') format('eot'),
+       url('../fonts/iconfont.woff') format('woff'),
+       url('../fonts/iconfont.woff2') format('woff2'),
+       url('../fonts/iconfont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }

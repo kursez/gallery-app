@@ -1,4 +1,4 @@
 export default `
-                 <img src="<%=src %>" alt="<%=name %>"/>
-                 <h2><%=name %></h2>
+                 <img class="image__media" src="<%=src %>" alt="<%=name %>"/>
+                 <h2 class="image__title"><%=name %></h2>
                `;

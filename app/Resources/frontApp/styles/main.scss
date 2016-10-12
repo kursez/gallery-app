@@ -11,6 +11,7 @@
 
 // Fonts
 @import "common/fonts";
+@import "common/icons";
 
 // Bootstrap
 @import "../../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/mixins";
@@ -37,7 +38,6 @@
 // Common
 @import 'setup/normalize.scss';
 @import "common/base";
-@import "common/icons";
 
 // Modules
 @import "modules/section";
@@ -47,3 +47,4 @@
 // Component
 @import "components/album";
 @import "components/image";
+@import "components/menu";

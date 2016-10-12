@@ -12,7 +12,7 @@
 /vendor/
 /bin/
 /composer.phar
-DD_Store
+.DS_Store
 .idea
 node_modules
 /app/Resources/frontApp/fonts/iconfont*
