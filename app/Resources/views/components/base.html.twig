@@ -14,6 +14,8 @@
       {% include 'components/footer.html.twig' %}
     {% endblock %}
 
+    <div id="modal" class="modal"></div>
+
     {% if app.environment == 'dev' %}
       <script src="{{ asset('dist/scripts/main.js') }}"></script>
     {% else %}

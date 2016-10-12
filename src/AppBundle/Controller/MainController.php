@@ -83,6 +83,10 @@ class MainController extends Controller
         $name = $request->request->get('name');
         $file = $request->files->get('file');
 
+//        var_dump($albumId);
+//        var_dump($name);
+//        var_dump($file);
+
         if ($name !== null && $albumId !== null && $file !== null && strlen($name) > 0 && strlen($albumId) > 0) {
             $album = $this->getDoctrine()
                 ->getRepository('AppBundle:Album')
@@ -110,7 +114,7 @@ class MainController extends Controller
             }
         }
 
-        return new JsonResponse('Problem submitting your image', 400);
+        return new JsonResponse(($file == null) ? 'OXI LEME' : 'NAI', 400);
     }
 
     /**

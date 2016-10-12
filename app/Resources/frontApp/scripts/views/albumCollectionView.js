@@ -12,12 +12,8 @@ export default Marionette.CollectionView.extend({
     'content': '#content'
   },
 
-  onChildviewSelectEntry: function(child) {
-    this.triggerMethod('select:entry', child.model);
-  },
-
-  onSelectEntry: function (e) {
-    Backbone.history.navigate('album/' + e.attributes.id , true);
+  onChildviewSelectAlbum: function(album) {
+    Backbone.history.navigate('album/' + album.model.attributes.id , true);
   }
 });
 

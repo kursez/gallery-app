@@ -1,0 +1,14 @@
+.options {
+  float: right;
+  padding-top: $separator-xs;
+}
+
+.options__icon {
+  font-size: 1.2em;
+  @extend .type--gray;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}

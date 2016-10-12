@@ -1,0 +1,80 @@
+.modal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.4);
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  overflow: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s linear;
+
+  &--open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &--no-mobile {
+    display: none;
+
+    @include respond-to(md) {
+      display: block;
+    }
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: 9px;
+  right: 10px;
+}
+
+.modal-body {
+  margin: 10% auto;
+  max-width: 500px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: $border-radius-base;
+
+  -webkit-box-shadow: 0 0 5px 0 rgba(0,0,0,0.18);
+  -moz-box-shadow: 0 0 5px 0 rgba(0,0,0,0.18);
+  box-shadow: 0 0 5px 0 rgba(0,0,0,0.18);
+
+  &--big {
+    max-width: 800px;
+  }
+}
+
+.modal-container {
+  padding: $separator-md;
+  background-color: $color-white;
+  position: relative;
+
+  input {
+    font-size: 20px;
+    border-radius: 0;
+    border-bottom: 1px solid $color-gray;
+    width: 100%;
+    padding: $separator-md 0 $separator-xs;
+    outline: none;
+    color: $color-gray;
+  }
+}
+
+.modal-header {
+  font-size: 40px;
+  color: $color-black;
+  font-weight: 500;
+  letter-spacing: -2.25px;
+}
+
+.modal {
+  .link {
+    display: inline-block;
+    margin-top: $separator-md;
+    font-size: 20px;
+    margin-right: $separator-xs;
+  }
+}

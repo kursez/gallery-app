@@ -11,7 +11,8 @@ export default Marionette.View.extend({
   events: {
     'click .album__info': 'onClickEvent'
   },
+
   onClickEvent: function () {
-    this.trigger('select:entry', this);
+    this.trigger('select:album', this);
   }
 });

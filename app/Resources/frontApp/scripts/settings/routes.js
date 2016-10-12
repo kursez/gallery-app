@@ -17,5 +17,21 @@ export default {
 
   deleteAlbum: function(id) {
     return 'album' + id;
+  },
+
+  getImage: function(id) {
+    return 'image/' + id;
+  },
+
+  postImage: function() {
+    return 'image';
+  },
+
+  putImage: function(id) {
+    return 'image' + id;
+  },
+
+  deleteImage: function(id) {
+    return 'image' + id;
   }
 };

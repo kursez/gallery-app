@@ -31,9 +31,11 @@ export default Marionette.Object.extend({
       method: 'GET',
       url: routes.getAlbum(id),
       success: function(data) {
-        this.imageCollection = new ImageCollection(JSON.parse(data).images);
+        data = JSON.parse(data);
+
+        this.imageCollection = new ImageCollection(data.images);
         this.appLayout.options.imageCollection = this.imageCollection;
-        this.appLayout.triggerMethod('show:images');
+        this.appLayout.triggerMethod('show:images', data.name);
       }.bind(this)
     });
   },
