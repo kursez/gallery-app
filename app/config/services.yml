@@ -19,15 +19,15 @@ services:
 
     app.albums_serializer:
         class: AppBundle\Serializer\AlbumsSerializer
-        arguments: [app.albums_normalizer]
+        arguments: [@app.albums_normalizer]
 
     app.album_serializer:
         class: AppBundle\Serializer\AlbumSerializer
-        arguments: [app.album_normalizer]
+        arguments: [@app.album_normalizer]
 
     app.image_serializer:
         class: AppBundle\Serializer\ImageSerializer
-        arguments: [app.image_normalizer]
+        arguments: [@app.image_normalizer]
 
     app.create_album_type:
         class: AppBundle\Form\CreateAlbumType
