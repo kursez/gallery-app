@@ -13,7 +13,7 @@ export default Marionette.CollectionView.extend({
   },
 
   onChildviewSelectAlbum: function(album) {
-    Backbone.history.navigate('album/' + album.model.attributes.id , true);
+    Backbone.history.navigate('album/' + album.model.attributes.id + '/page/1', true);
   },
 
   onChildviewDeleteAlbum: function (data) {

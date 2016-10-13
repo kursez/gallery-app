@@ -8,7 +8,7 @@ export default {
   },
 
   getAlbumWithPagination: function(id, page) {
-    return 'album/' + id + '?page=' + page;
+    return 'album/' + id + '/page/' + page;
   },
 
   postAlbum: function() {

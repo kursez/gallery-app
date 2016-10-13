@@ -35,7 +35,7 @@ export default Marionette.Object.extend({
 
         this.imageCollection = new ImageCollection(data.images);
         this.appLayout.options.imageCollection = this.imageCollection;
-        this.appLayout.triggerMethod('show:images', data);
+        this.appLayout.triggerMethod('show:album', data, false);
       }.bind(this)
     });
   },
@@ -46,10 +46,9 @@ export default Marionette.Object.extend({
       url: routes.getAlbumWithPagination(id, page),
       success: function(data) {
         data = JSON.parse(data);
-
-        this.imageCollection = new ImageCollection(data.images);
+        this.imageCollection = new ImageCollection(data[0].images);
         this.appLayout.options.imageCollection = this.imageCollection;
-        this.appLayout.triggerMethod('show:images', data);
+        this.appLayout.triggerMethod('show:album', data[0], data[1]);
       }.bind(this)
     });
   }

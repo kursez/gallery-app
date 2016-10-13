@@ -17,6 +17,9 @@ services:
     app.image_normalizer:
         class: AppBundle\Serializer\ImageNormalizer
 
+    app.album_page_normalizer:
+        class: AppBundle\Serializer\AlbumPageNormalizer
+
     app.albums_serializer:
         class: AppBundle\Serializer\AlbumsSerializer
         arguments: [@app.albums_normalizer]
@@ -28,6 +31,10 @@ services:
     app.image_serializer:
         class: AppBundle\Serializer\ImageSerializer
         arguments: [@app.image_normalizer]
+
+    app.album_page_serializer:
+        class: AppBundle\Serializer\AlbumPageSerializer
+        arguments: [@app.album_page_normalizer]
 
     app.create_album_type:
         class: AppBundle\Form\CreateAlbumType

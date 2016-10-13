@@ -21,6 +21,7 @@ use AppBundle\Repository\AlbumRepository;
 
 class MainController extends Controller
 {
+
     /**
      * @Route("/", name="gallery")
      */
@@ -138,9 +139,32 @@ class MainController extends Controller
      * @Route("/album/{id}", name="getAlbum")
      * @Method({"GET"})
      */
-    public function getAlbumAction(Album $album)
+    public function getAlbumAction(Album $album, Request $request)
     {
         return new JsonResponse($this->get('app.album_serializer')->serialize($album));
+    }
+
+    /**
+     * @Route("/album/{id}/page/{page}", name="getAlbumPage")
+     * @Method({"GET"})
+     */
+    public function getAlbumPageAction(Album $album, $page, Request $request)
+    {
+        $images = $album->getImages();
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $images,
+            $request->query->getInt('page', $page),
+            $request->query->getInt('limit', 10)
+        );
+
+        $pageCount = ceil($pagination->getTotalItemCount() / 10);
+
+        $album->pageImages = $pagination->getItems();
+        $json = $this->get('app.album_page_serializer')->serialize([$album, $pageCount]);
+
+        return new JsonResponse($json);
     }
 
     /**
