@@ -4,4 +4,4 @@ export default `
   <li class="menu__item" data-edit>edit</li>
   <li class="menu__item" data-delete>delete</li>
 </ul>
-`
+`;

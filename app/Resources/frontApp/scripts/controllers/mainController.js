@@ -41,7 +41,16 @@ export default Marionette.Object.extend({
   },
 
   showAlbumPage: function (id, page) {
-    // to do
-    console.log('album page view', id, page);
+    $.ajax({
+      method: 'GET',
+      url: routes.getAlbumWithPagination(id, page),
+      success: function(data) {
+        data = JSON.parse(data);
+
+        this.imageCollection = new ImageCollection(data.images);
+        this.appLayout.options.imageCollection = this.imageCollection;
+        this.appLayout.triggerMethod('show:images', data);
+      }.bind(this)
+    });
   }
 });

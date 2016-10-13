@@ -1,28 +1,35 @@
 import Marionette from 'backbone.marionette';
 import _ from 'underscore';
 import template from './../templates/basicLayoutTemplate';
+import $ from './../templates/basicLayoutTemplate';
+
 import AlbumsView from './../views/albumCollectionView';
 import ImagesView from './../views/imageCollectionView';
 import TitleView from './../views/titleView';
 import OptionsView from './../views/optionsView';
 import ModalView from './../views/modalView';
-import AlbumModal from './../models/album.js';
+import PaginationView from './../views/paginationView';
+
+import AlbumModel from './../models/album.js';
 
 export default Marionette.View.extend({
   el: '#app',
   template: _.template(template),
   modal: new ModalView(),
+  pagination: new PaginationView(),
   regions: {
     title: '#title',
     content: '#content',
     options: '#options',
-    modal: '#modal'
+    modal: '#modal',
+    pagination: '#pagination'
   },
 
   initialize: function () {
     this.render();
 
     this.showChildView('modal', this.modal);
+    this.showChildView('pagination', this.pagination);
   },
 
   onShowAlbums: function () {
@@ -33,6 +40,9 @@ export default Marionette.View.extend({
     this.showChildView('title', titleView);
     this.showChildView('content', this.albumsView);
     this.showChildView('options', optionsView);
+
+    console.log(this.pagination.$el);
+    this.pagination.$el.hide();
   },
 
   onShowImages: function (data) {
@@ -43,6 +53,7 @@ export default Marionette.View.extend({
     this.showChildView('title', titleView);
     this.showChildView('content', imageView);
     this.showChildView('options', optionsView);
+    this.pagination.$el.show();
   },
 
   onChildviewCloseModal: function() {
@@ -50,7 +61,7 @@ export default Marionette.View.extend({
   },
 
   onChildviewAddAlbum: function (data) {
-    var albumModel = new AlbumModal(JSON.parse(data));
+    var albumModel = new AlbumModel(JSON.parse(data));
 
     this.getOption('albumCollection').add(albumModel);
     this.albumsView.render();

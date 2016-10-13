@@ -36,7 +36,7 @@ export default Marionette.View.extend({
       data.append(i, file);
     });
 
-    console.log(data.getAll());
+    console.log(data);
 
     $.ajax({
       method: 'POST',

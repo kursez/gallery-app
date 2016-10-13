@@ -1,0 +1,23 @@
+.pagination {
+  .icon {
+    position: absolute;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: $color-gray;
+    color: white;
+    padding: 10px;
+    transition: opacity 0.2s linear;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  [data-prev] {
+    right: $separator-sm;
+  }
+
+  [data-next] {
+    left: $separator-sm;
+  }
+}

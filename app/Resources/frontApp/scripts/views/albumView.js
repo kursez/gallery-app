@@ -1,6 +1,5 @@
 import Marionette from 'backbone.marionette';
 import _ from 'underscore';
-import $ from 'jquery';
 import template from './../templates/albumTemplate';
 import Album from './../models/album';
 import MenuView from './../views/menuView';

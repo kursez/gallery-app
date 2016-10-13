@@ -48,7 +48,6 @@ export default Marionette.View.extend({
 
       success: function() {
         this.triggerMethod('delete:' + dataType, dataTypeId);
-        this.triggerMethod('close:modal', this);
       }.bind(this),
 
       error: function(data) {
@@ -74,6 +73,8 @@ export default Marionette.View.extend({
       throw new Error({'error':'No such data type'});
 
     }
+
+    data = this.$el.closest('form').serialize();
 
     $.ajax({
       method: 'PUT',
