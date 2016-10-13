@@ -108,13 +108,13 @@ export default Marionette.View.extend({
   },
 
   onChildviewOpenEditAlbumModal: function (id) {
-    this.modal.addImageView.options.albumId = id;
+    this.modal.editAlbumView.options.albumId = id;
     this.modal.showChildView('container', this.modal.editAlbumView);
     this.modal.openModal();
   },
 
   onChildviewOpenEditImageModal: function (id) {
-    this.modal.addImageView.options.imageId = id;
+    this.modal.editImageView.options.imageId = id;
     this.modal.showChildView('container', this.modal.editImageView);
     this.modal.openModal();
   },

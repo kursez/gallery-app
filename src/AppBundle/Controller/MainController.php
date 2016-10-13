@@ -175,7 +175,7 @@ class MainController extends Controller
     {
         $album = new Album();
         $form = $this->createForm($this->get('app.create_album_type'), $album);
-        $form->handleRequest($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -196,7 +196,7 @@ class MainController extends Controller
     {
         $album = new Album();
         $form = $this->createForm($this->get('app.create_album_type'), $album);
-        $form->handleRequest($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
