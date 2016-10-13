@@ -30,5 +30,13 @@ export default Marionette.View.extend({
 
   onClickEvent: function () {
     this.trigger('select:album', this);
+  },
+
+  onChildviewDeleteAlbum: function (data) {
+    this.triggerMethod('delete:album', data);
+  },
+
+  onChildviewEditAlbum: function (data) {
+    this.triggerMethod('edit:album', data);
   }
 });

@@ -12,11 +12,11 @@ export default {
   },
 
   putAlbum: function(id) {
-    return 'album' + id;
+    return 'album/' + id;
   },
 
   deleteAlbum: function(id) {
-    return 'album' + id;
+    return 'album/' + id;
   },
 
   getImage: function(id) {
@@ -28,10 +28,10 @@ export default {
   },
 
   putImage: function(id) {
-    return 'image' + id;
+    return 'image/' + id;
   },
 
   deleteImage: function(id) {
-    return 'image' + id;
+    return 'image/' + id;
   }
 };

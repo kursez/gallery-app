@@ -50,7 +50,7 @@ export default Marionette.View.extend({
   },
 
   onChildviewShowError: function (data) {
-    var errorView = new ErrorView({error: data.responseJSON});
+    var errorView = new ErrorView({error: JSON.parse(data.responseText)});
     this.showChildView('error', errorView);
   }
 });

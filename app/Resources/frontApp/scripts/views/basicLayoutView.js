@@ -27,11 +27,11 @@ export default Marionette.View.extend({
 
   onShowAlbums: function () {
     var titleView = new TitleView({model: {title: 'Albums'}}),
-        albumsView = new AlbumsView({collection: this.getOption('albumCollection')}),
         optionsView = new OptionsView({'data-options-action': ''});
 
+    this.albumsView = new AlbumsView({collection: this.getOption('albumCollection')}),
     this.showChildView('title', titleView);
-    this.showChildView('content', albumsView);
+    this.showChildView('content', this.albumsView);
     this.showChildView('options', optionsView);
   },
 
@@ -50,28 +50,21 @@ export default Marionette.View.extend({
   },
 
   onChildviewAddAlbum: function (data) {
-    var albumModel = new AlbumModal(JSON.parse(data)),
-        albumsView;
+    var albumModel = new AlbumModal(JSON.parse(data));
 
     this.getOption('albumCollection').add(albumModel);
-    albumsView = new AlbumsView({collection: this.getOption('albumCollection')});
-    this.showChildView('content', albumsView);
+    this.albumsView.render();
   },
 
-  onChildviewRemoveAlbum: function (id) {
-    var albumsView;
+  onChildviewDeleteAlbum: function (id) {
+    id = parseInt(id);
 
-    this.getOption('albumCollection');
-    albumsView = new AlbumsView({collection: this.getOption('albumCollection')});
-    this.showChildView('content', albumsView);
+    this.getOption('albumCollection').remove(this.getOption('albumCollection').where({id: id}));
+    this.albumsView.render();
   },
 
   onChildviewEditAlbum: function (id, name) {
-    var albumsView;
-
-    this.getOption('albumCollection');
-    albumsView = new AlbumsView({collection: this.getOption('albumCollection')});
-    this.showChildView('content', albumsView);
+    this.albumsView.render();
   },
 
   onChildviewAddImage: function (data) {

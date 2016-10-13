@@ -14,5 +14,13 @@ export default Marionette.CollectionView.extend({
 
   onChildviewSelectAlbum: function(album) {
     Backbone.history.navigate('album/' + album.model.attributes.id , true);
+  },
+
+  onChildviewDeleteAlbum: function (data) {
+    this.triggerMethod('delete:album', data);
+  },
+
+  onChildviewEditAlbum: function (data) {
+    this.triggerMethod('edit:album', data);
   }
 });
