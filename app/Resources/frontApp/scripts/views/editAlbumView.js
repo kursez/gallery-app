@@ -24,13 +24,15 @@ export default Marionette.View.extend({
         url = routes.putAlbum(this.getOption('albumId'));
 
     form = this.$el;
-    form.attr('enctype', 'multipart/form-data');
-    data = form.serialize();
+    data = new FormData(form[0]);
+    //data = form.serialize();
 
     $.ajax({
       type: 'PUT',
       url: url,
       data: data,
+      contentType: 'application/x-www-form-urlencoded',
+      processData: false,
 
       success: function(data) {
         this.triggerMethod('edit:album', data);
