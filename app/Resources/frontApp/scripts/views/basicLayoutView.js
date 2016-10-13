@@ -95,8 +95,6 @@ export default Marionette.View.extend({
     data = JSON.parse(data);
     id = parseInt(data.id);
 
-    console.log('ID:' + id);
-
     child = this.getOption('albumCollection').find(function (model) {
       return model.attributes.id === id;
     });
@@ -146,14 +144,12 @@ export default Marionette.View.extend({
 
     if (typeof attr !== 'undefined') {
       if (attr === '') {
-        this.modal.showChildView('container', this.modal.addAlbumView);
+        this.modal.showAddAlbumView();
         this.modal.openModal();
 
       } else {
-        this.modal.addImageView.options.albumId = attr;
-        this.modal.showChildView('container', this.modal.addImageView);
+        this.modal.showAddImageView(attr);
         this.modal.openModal();
-
       }
     }
   }

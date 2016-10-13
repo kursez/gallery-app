@@ -14,10 +14,6 @@ export default Marionette.View.extend({
   tagName: 'div',
   className: 'modal__body modal__body--big',
   template: _.template(template),
-  addImageView: new AddImageView(),
-  addAlbumView: new AddAlbumView(),
-  editImageView: new EditImageView(),
-  editAlbumView: new EditAlbumView(),
 
   regions: {
     'container': '.modal__content',
@@ -32,6 +28,31 @@ export default Marionette.View.extend({
     Backbone.history.on("all", function () {
       this.closeModal();
     }.bind(this));
+  },
+
+  showAddAlbumView: function () {
+    var addAlbumView = new AddAlbumView();
+
+    this.showChildView('container', addAlbumView);
+  },
+
+  showAddImageView: function (id) {
+    var addImageView = new AddImageView();
+
+    addImageView.options.albumId = id;
+    this.showChildView('container', addImageView);
+  },
+
+  showEditAlbumView: function (option) {
+    var editAlbumView = new EditAlbumView();
+
+    this.showChildView('container', editAlbumView);
+  },
+
+  showEditImageView: function (option) {
+    var editImageView = new EditImageView();
+
+    this.showChildView('container', editImageView);
   },
 
   openModal: function () {

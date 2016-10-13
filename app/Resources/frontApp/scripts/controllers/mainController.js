@@ -11,19 +11,15 @@ export default Marionette.Object.extend({
   appLayout: new BasicLayoutView(),
 
   showAlbums: function () {
-    if (this.albumCollection === null) {
-      $.ajax({
-        method: 'GET',
-        url: routes.getAlbums(),
-        success: function(data) {
-          this.albumCollection = new AlbumCollection(JSON.parse(data));
-          this.appLayout.options.albumCollection = this.albumCollection;
-          this.appLayout.triggerMethod('show:albums');
-        }.bind(this)
-      });
-    } else {
-      this.appLayout.triggerMethod('show:albums');
-    }
+    $.ajax({
+      method: 'GET',
+      url: routes.getAlbums(),
+      success: function(data) {
+        this.albumCollection = new AlbumCollection(JSON.parse(data));
+        this.appLayout.options.albumCollection = this.albumCollection;
+        this.appLayout.triggerMethod('show:albums');
+      }.bind(this)
+    });
   },
 
   showAlbum: function (id) {
