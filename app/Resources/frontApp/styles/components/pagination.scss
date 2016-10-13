@@ -1,4 +1,10 @@
 .pagination {
+  position: fixed;
+  bottom: 5px;
+  width: 100%;
+  height: 50px;
+  left: 0;
+
   .icon {
     position: absolute;
     cursor: pointer;

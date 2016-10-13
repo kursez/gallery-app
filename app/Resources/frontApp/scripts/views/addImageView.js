@@ -22,29 +22,20 @@ export default Marionette.View.extend({
     var form,
         data;
 
-    form = $(this.el);
-    form.find('input[name="album"]').val(1);
-    data = form.serialize();
-
-    console.log(form.find('[name^="file"]'));
-
-    data = new FormData(form.find('[name^="file"]'));
-
-    console.log(form.find('input[name^="file"]').get(0).files);
-    $.each(form.find('input[name^="file"]').get(0).files, function(i, file) {
-      console.log(i, file);
-      data.append(i, file);
-    });
-
-    console.log(data);
+    form = this.$el;
+    form.attr('enctype', 'multipart/form-data');
+    form.find('input[name="create_image[album]"]').val(this.getOption('albumId'));
+    data = new FormData(form[0]);
 
     $.ajax({
       method: 'POST',
       url: routes.postImage(),
       data: data,
-      contentType: 'multipart/form-data',
+      cache: false,
+      contentType: false,
+      processData: false,
       success: function(data) {
-        this.triggerMethod('add:album', data);
+        this.triggerMethod('add:image', data);
         this.triggerMethod('close:modal', this);
       }.bind(this),
 

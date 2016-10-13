@@ -10,7 +10,8 @@ import OptionsView from './../views/optionsView';
 import ModalView from './../views/modalView';
 import PaginationView from './../views/paginationView';
 
-import AlbumModel from './../models/album.js';
+import AlbumModel from './../models/album';
+import ImageModel from './../models/image';
 
 export default Marionette.View.extend({
   el: '#app',
@@ -46,11 +47,11 @@ export default Marionette.View.extend({
 
   onShowAlbum: function (album, pagination) {
     var titleView = new TitleView({model: {title: 'Album: ' + album.name }}),
-        imageView = new ImagesView({collection: this.getOption('imageCollection')}),
         optionsView = new OptionsView({'data-options-action': album.id});
 
+    this.imagesView = new ImagesView({collection: this.getOption('imageCollection')});
     this.showChildView('title', titleView);
-    this.showChildView('content', imageView);
+    this.showChildView('content', this.imagesView);
     this.showChildView('options', optionsView);
 
     if (pagination) {
@@ -87,7 +88,10 @@ export default Marionette.View.extend({
   },
 
   onChildviewAddImage: function (data) {
-    // to do
+    var imageModel = new ImageModel(JSON.parse(data));
+
+    this.getOption('imageCollection').add(imageModel);
+    this.imagesView.render();
   },
 
   onChildviewOpenModal: function(child) {
@@ -99,6 +103,7 @@ export default Marionette.View.extend({
         this.modal.openModal();
 
       } else {
+        this.modal.addImageView.options.albumId = attr;
         this.modal.showChildView('container', this.modal.addImageView);
         this.modal.openModal();
 
