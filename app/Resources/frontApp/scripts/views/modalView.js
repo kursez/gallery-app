@@ -56,7 +56,7 @@ export default Marionette.View.extend({
   },
 
   onChildviewEditAlbum: function (data) {
-    this.triggerMethod('eit:album', data);
+    this.triggerMethod('edit:album', data);
   },
 
   onChildviewEditImage: function (data) {

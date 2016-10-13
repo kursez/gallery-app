@@ -1,7 +1,6 @@
 import Marionette from 'backbone.marionette';
 import _ from 'underscore';
 import template from './../templates/basicLayoutTemplate';
-import $ from './../templates/basicLayoutTemplate';
 
 import AlbumsView from './../views/albumCollectionView';
 import ImagesView from './../views/imageCollectionView';
@@ -37,7 +36,7 @@ export default Marionette.View.extend({
     var titleView = new TitleView({model: {title: 'Albums'}}),
         optionsView = new OptionsView({'data-options-action': ''});
 
-    this.albumsView = new AlbumsView({collection: this.getOption('albumCollection')}),
+    this.albumsView = new AlbumsView({collection: this.getOption('albumCollection')});
     this.showChildView('title', titleView);
     this.showChildView('content', this.albumsView);
     this.showChildView('options', optionsView);
@@ -77,14 +76,32 @@ export default Marionette.View.extend({
   },
 
   onChildviewDeleteAlbum: function (id) {
+    var deletedAlbum;
+
     id = parseInt(id);
 
-    this.getOption('albumCollection').remove(this.getOption('albumCollection').where({id: id}));
+    deletedAlbum = this.getOption('albumCollection').find(function (model) {
+      return model.attributes.id === id;
+    });
+
+    this.getOption('albumCollection').remove(deletedAlbum);
     this.albumsView.render();
   },
 
   onChildviewEditAlbum: function (data) {
-    console.log(data);
+    var child,
+        id;
+
+    data = JSON.parse(data);
+    id = parseInt(data.id);
+
+    console.log('ID:' + id);
+
+    child = this.getOption('albumCollection').find(function (model) {
+      return model.attributes.id === id;
+    });
+
+    console.log(child);
     this.albumsView.render();
   },
 
@@ -95,15 +112,20 @@ export default Marionette.View.extend({
     this.imagesView.render();
   },
 
-  onChildviewEditImage: function (data) {
-    console.log(data);
+  onChildviewEditImage: function () {
     this.albumsView.render();
   },
 
   onChildviewDeleteImage: function (id) {
+    var removedImage;
+
     id = parseInt(id);
 
-    this.getOption('imageCollection').remove(this.getOption('imageCollection').where({id: id}));
+    removedImage = this.getOption('imageCollection').find(function (model) {
+      return model.attributes.id === id;
+    });
+
+    this.getOption('imageCollection').remove(removedImage);
     this.imagesView.render();
   },
 

@@ -17,11 +17,14 @@ export default Marionette.View.extend({
     var pages = this.getOption('pages'),
         page = this.getOption('page');
 
-    if (page == pages) {
+    page = parseInt(page);
+    pages = parseInt(pages);
+
+    if (page === pages) {
       this.$el.find('[data-next]').hide();
     }
 
-    if (page == 1) {
+    if (page === 1) {
       this.$el.find('[data-prev]').hide();
     }
   },

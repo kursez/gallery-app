@@ -28,7 +28,7 @@ export default Marionette.View.extend({
     data = new FormData(form[0]);
 
     $.ajax({
-      method: 'POST',
+      type: 'POST',
       url: routes.postImage(),
       data: data,
       cache: false,

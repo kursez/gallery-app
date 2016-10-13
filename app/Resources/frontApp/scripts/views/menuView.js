@@ -56,7 +56,7 @@ export default Marionette.View.extend({
     });
   },
 
-  editEntry: function (e) {
+  editEntry: function () {
     var dataType = this.$el.attr('data-type'),
         dataTypeId = this.$el.attr('data-type-id');
 

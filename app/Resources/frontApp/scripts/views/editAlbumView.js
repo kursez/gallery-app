@@ -24,10 +24,11 @@ export default Marionette.View.extend({
         url = routes.putAlbum(this.getOption('albumId'));
 
     form = this.$el;
+    form.attr('enctype', 'multipart/form-data');
     data = form.serialize();
 
     $.ajax({
-      method: 'PUT',
+      type: 'PUT',
       url: url,
       data: data,
 
