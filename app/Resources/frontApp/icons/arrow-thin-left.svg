@@ -3,5 +3,5 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="400px" height="400px" viewBox="0 0 400 400" enable-background="new 0 0 400 400" xml:space="preserve">
-<path d="M101.172,15.625L285.547,200L101.172,384.375l7.031,6.25L298.828,200L108.203,9.375L101.172,15.625z"/>
+<path d="M298.828,15.625L114.453,200l184.375,184.375l-7.031,6.25L101.172,200L291.797,9.375L298.828,15.625z"/>
 </svg>

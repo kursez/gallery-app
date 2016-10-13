@@ -14,10 +14,10 @@
   }
 
   [data-prev] {
-    right: $separator-sm;
+    left: $separator-sm;
   }
 
   [data-next] {
-    left: $separator-sm;
+    right: $separator-sm;
   }
 }

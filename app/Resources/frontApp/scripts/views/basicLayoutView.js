@@ -44,7 +44,7 @@ export default Marionette.View.extend({
     this.pagination.$el.hide();
   },
 
-  onShowAlbum: function (album, page) {
+  onShowAlbum: function (album, pagination) {
     var titleView = new TitleView({model: {title: 'Album: ' + album.name }}),
         imageView = new ImagesView({collection: this.getOption('imageCollection')}),
         optionsView = new OptionsView({'data-options-action': album.id});
@@ -53,7 +53,15 @@ export default Marionette.View.extend({
     this.showChildView('content', imageView);
     this.showChildView('options', optionsView);
 
-    this.pagination.$el.show();
+    if (pagination) {
+      this.pagination.$el.show();
+      this.pagination.options.pages = pagination.pages;
+      this.pagination.options.page = pagination.page;
+      this.pagination.options.albumId = album.id;
+      this.pagination.render();
+    } else {
+      this.pagination.$el.hide();
+    }
   },
 
   onChildviewCloseModal: function() {
