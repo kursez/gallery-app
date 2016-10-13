@@ -40,6 +40,7 @@ export default Marionette.View.extend({
 
   closeModal: function () {
     $('#modal').removeClass('modal--open');
+    this.$el.find('.modal__error').hide();
   },
 
   onChildviewCloseModal: function () {
@@ -65,5 +66,6 @@ export default Marionette.View.extend({
   onChildviewShowError: function (data) {
     var errorView = new ErrorView({error: JSON.parse(data.responseText)});
     this.showChildView('error', errorView);
+    this.$el.find('.modal__error').show();
   }
 });
