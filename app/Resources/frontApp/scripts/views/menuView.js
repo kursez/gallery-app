@@ -57,38 +57,9 @@ export default Marionette.View.extend({
   },
 
   editEntry: function (e) {
-    e.preventDefault();
-
-    var route,
-        dataType = this.$el.attr('data-type'),
+    var dataType = this.$el.attr('data-type'),
         dataTypeId = this.$el.attr('data-type-id');
 
-    if (dataType === 'album') {
-      route = routes.putAlbum(dataTypeId);
-
-    } else if (dataType === 'image') {
-      route = routes.putImage(dataTypeId);
-
-    } else {
-      throw new Error({'error':'No such data type'});
-
-    }
-
-    data = this.$el.closest('form').serialize();
-
-    $.ajax({
-      method: 'PUT',
-      url: route,
-      data: data,
-
-      success: function(data) {
-        this.triggerMethod('edit:' + dataType, data);
-        this.triggerMethod('close:modal', this);
-      }.bind(this),
-
-      error: function(data) {
-        this.triggerMethod('show:error', data);
-      }.bind(this)
-    });
+    this.triggerMethod('open:edit:' + dataType + ':modal', dataTypeId);
   }
 });

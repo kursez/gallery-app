@@ -22,5 +22,9 @@ export default Marionette.CollectionView.extend({
 
   onChildviewEditAlbum: function (data) {
     this.triggerMethod('edit:album', data);
+  },
+
+  onChildviewOpenEditAlbumModal: function (id) {
+    this.triggerMethod('open:edit:album:modal', id);
   }
 });

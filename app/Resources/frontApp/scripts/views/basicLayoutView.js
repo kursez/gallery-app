@@ -83,7 +83,8 @@ export default Marionette.View.extend({
     this.albumsView.render();
   },
 
-  onChildviewEditAlbum: function (id, name) {
+  onChildviewEditAlbum: function (data) {
+    console.log(data);
     this.albumsView.render();
   },
 
@@ -92,6 +93,30 @@ export default Marionette.View.extend({
 
     this.getOption('imageCollection').add(imageModel);
     this.imagesView.render();
+  },
+
+  onChildviewEditImage: function (data) {
+    console.log(data);
+    this.albumsView.render();
+  },
+
+  onChildviewDeleteImage: function (id) {
+    id = parseInt(id);
+
+    this.getOption('imageCollection').remove(this.getOption('imageCollection').where({id: id}));
+    this.imagesView.render();
+  },
+
+  onChildviewOpenEditAlbumModal: function (id) {
+    this.modal.addImageView.options.albumId = id;
+    this.modal.showChildView('container', this.modal.editAlbumView);
+    this.modal.openModal();
+  },
+
+  onChildviewOpenEditImageModal: function (id) {
+    this.modal.addImageView.options.imageId = id;
+    this.modal.showChildView('container', this.modal.editImageView);
+    this.modal.openModal();
   },
 
   onChildviewOpenModal: function(child) {

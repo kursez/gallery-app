@@ -3,8 +3,11 @@ import Backbone from 'backbone';
 import _ from 'underscore';
 import $ from 'jquery';
 import template from './../templates/modalTemplate';
+
 import AddImageView from './../views/addImageView';
 import AddAlbumView from './../views/addAlbumView';
+import EditImageView from './../views/editImageView';
+import EditAlbumView from './../views/editAlbumView';
 import ErrorView from './../views/errorView.js';
 
 export default Marionette.View.extend({
@@ -13,6 +16,8 @@ export default Marionette.View.extend({
   template: _.template(template),
   addImageView: new AddImageView(),
   addAlbumView: new AddAlbumView(),
+  editImageView: new EditImageView(),
+  editAlbumView: new EditAlbumView(),
 
   regions: {
     'container': '.modal__content',
@@ -47,6 +52,14 @@ export default Marionette.View.extend({
 
   onChildviewAddImage: function (data) {
     this.triggerMethod('add:image', data);
+  },
+
+  onChildviewEditAlbum: function (data) {
+    this.triggerMethod('eit:album', data);
+  },
+
+  onChildviewEditImage: function (data) {
+    this.triggerMethod('edit:image', data);
   },
 
   onChildviewShowError: function (data) {

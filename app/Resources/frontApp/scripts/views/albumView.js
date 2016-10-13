@@ -35,7 +35,7 @@ export default Marionette.View.extend({
     this.triggerMethod('delete:album', data);
   },
 
-  onChildviewEditAlbum: function (data) {
-    this.triggerMethod('edit:album', data);
+  onChildviewOpenEditAlbumModal: function (id) {
+    this.triggerMethod('open:edit:album:modal', id);
   }
 });

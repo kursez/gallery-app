@@ -218,6 +218,11 @@ class MainController extends Controller
     {
         $id = $album->getId();
         $em = $this->getDoctrine()->getManager();
+        $images = $album->getImages();
+
+        foreach ($images as $image) {
+            $em->remove($image);
+        }
         $em->remove($album);
         $em->flush();
 
