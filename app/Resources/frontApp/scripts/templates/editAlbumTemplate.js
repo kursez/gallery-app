@@ -5,7 +5,7 @@ export default `
     <input name="create_album[name]" type="text" placeholder="New album name">
   </div>
   <div class="form-field">
-    <input name="submit" type="submit" value="submit">
+    <input name="submit" type="submit" value="Edit album">
   </div>
 </form>
 `;

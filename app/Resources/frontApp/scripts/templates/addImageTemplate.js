@@ -11,7 +11,7 @@ export default `
     <input name="create_image[src]" type="file">
   </div>
   <div class="form-field">
-    <input name="submit" type="submit" value="submit">
+    <input name="submit" type="submit" value="Add image">
   </div>
 </form>
 `;

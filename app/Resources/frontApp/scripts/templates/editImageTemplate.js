@@ -5,7 +5,7 @@ export default `
     <input name="edit_image[name]" type="text" placeholder="New image name">
   </div>
   <div class="form-field">
-    <input name="submit" type="submit" value="submit">
+    <input name="submit" type="submit" value="Edit image">
   </div>
 </form>
 `;
