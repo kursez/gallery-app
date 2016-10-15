@@ -1,6 +1,7 @@
 import Marionette from 'backbone.marionette';
 import Backbone from 'backbone';
 import AlbumView from './../views/albumView';
+import DelayLoopCallback from './../services/delayLoopCallback';
 
 export default Marionette.CollectionView.extend({
   tagName: 'ul',
@@ -13,7 +14,17 @@ export default Marionette.CollectionView.extend({
   },
 
   onChildviewSelectAlbum: function(album) {
-    Backbone.history.navigate('album/' + album.model.attributes.id + '/page/1', true);
+    var delayLoopCallback = new DelayLoopCallback();
+    this.$el.addClass('animate-shrink-300');
+
+    delayLoopCallback
+        .setLoopCount(1)
+        .setLoopPeriod(300)
+        .setEndCallback(function () {
+          Backbone.history.navigate('album/' + album.model.attributes.id + '/page/1', true);
+        }.bind(this))
+        .execute();
+
   },
 
   onChildviewDeleteAlbum: function (data) {

@@ -14,7 +14,7 @@ export default Marionette.Object.extend({
     $.ajax({
       method: 'GET',
       url: routes.getAlbums(),
-      success: function(data) {
+      success: function (data) {
         this.albumCollection = new AlbumCollection(JSON.parse(data));
         this.appLayout.options.albumCollection = this.albumCollection;
         this.appLayout.triggerMethod('show:albums');
@@ -26,7 +26,7 @@ export default Marionette.Object.extend({
     $.ajax({
       method: 'GET',
       url: routes.getAlbum(id),
-      success: function(data) {
+      success: function (data) {
         data = JSON.parse(data);
 
         this.imageCollection = new ImageCollection(data.images);
@@ -42,7 +42,7 @@ export default Marionette.Object.extend({
     $.ajax({
       method: 'GET',
       url: routes.getAlbumWithPagination(id, page),
-      success: function(data) {
+      success: function (data) {
         data = JSON.parse(data);
         pagination.pages = data[1];
         pagination.page = page;

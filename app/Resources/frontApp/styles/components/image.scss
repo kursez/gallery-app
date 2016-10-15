@@ -1,5 +1,10 @@
 .image {
   margin-bottom: $separator-sm;
+  transition: transform 0.3s linear;
+
+  .animate-shrink-300 & {
+    transform: scale(0, 0);
+  }
 }
 
 .image__media {
