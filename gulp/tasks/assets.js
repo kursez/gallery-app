@@ -1,7 +1,7 @@
 'use strict';
 
 var assetsTask = function (gulp, plugins, config, helpers) {
-  gulp.task('assets', function () {
+  gulp.task('assets', ['icons'], function () {
     var src = [config.paths.src + '/{images,videos,fonts}/**/*.*', '!**/.keep'];
     var dest = config.paths.dest;
 
