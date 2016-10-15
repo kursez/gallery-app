@@ -3,7 +3,7 @@
 var iconsTask = function (gulp, plugins, config, helpers) {
   gulp.task('icons', function () {
     var src = config.paths.src + '/icons/*.svg';
-    var dest = config.paths.src + '/fonts';
+    var dest = config.paths.dest + '/fonts';
 
     return gulp.src(src)
       .pipe(plugins.plumber(helpers.onError))
