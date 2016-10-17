@@ -10,10 +10,17 @@ export default Marionette.CollectionView.extend({
     this.triggerMethod('select:entry', child.model);
   },
 
+  initialize: function () {
+    window.onpopstate = function (e) {
+      e.preventDefault();
+      this.$el.removeClass('animate-image');
+    }.bind(this);
+  },
+
   onRender: function () {
     setTimeout(function () {
-      this.$el.addClass('animate-image-300');
-    }.bind(this), 300);
+      this.$el.addClass('animate-image');
+    }.bind(this), 0);
   }
 });
 
