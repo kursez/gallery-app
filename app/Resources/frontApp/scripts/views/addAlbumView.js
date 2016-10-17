@@ -22,6 +22,8 @@ export default Marionette.View.extend({
     var form,
         data;
 
+    this.triggerMethod('show:loader', this);
+
     form = $(this.el);
     data = form.serialize();
 
@@ -32,11 +34,15 @@ export default Marionette.View.extend({
 
       success: function(data) {
         this.triggerMethod('add:album', data);
+        this.triggerMethod('hide:loader', this);
         this.triggerMethod('close:modal', this);
+
       }.bind(this),
 
       error: function(data) {
         this.triggerMethod('show:error', data);
+        this.triggerMethod('hide:loader', this);
+
       }.bind(this)
     });
   }

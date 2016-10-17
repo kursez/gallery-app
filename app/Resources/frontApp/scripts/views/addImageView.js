@@ -22,6 +22,8 @@ export default Marionette.View.extend({
     var form,
         data;
 
+    this.triggerMethod('show:loader', this);
+
     form = this.$el;
     form.attr('enctype', 'multipart/form-data');
     form.find('input[name="create_image[album]"]').val(this.getOption('imageId'));
@@ -37,10 +39,12 @@ export default Marionette.View.extend({
       success: function(data) {
         this.triggerMethod('add:image', data);
         this.triggerMethod('close:modal', this);
+        this.triggerMethod('hide:loader', this);
       }.bind(this),
 
       error: function(data) {
         this.triggerMethod('show:error', data);
+        this.triggerMethod('hide:loader', this);
       }.bind(this)
     });
   }

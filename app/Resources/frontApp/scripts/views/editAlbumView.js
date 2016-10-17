@@ -23,6 +23,8 @@ export default Marionette.View.extend({
         data,
         url = routes.putAlbum(this.getOption('albumId'));
 
+    this.triggerMethod('show:loader', this);
+
     form = this.$el;
     data = form.serialize();
 
@@ -39,10 +41,12 @@ export default Marionette.View.extend({
       success: function(data) {
         this.triggerMethod('edit:album', data);
         this.triggerMethod('close:modal', this);
+        this.triggerMethod('hide:loader', this);
       }.bind(this),
 
       error: function(data) {
         this.triggerMethod('show:error', data);
+        this.triggerMethod('hide:loader', this);
       }.bind(this)
     });
   }
