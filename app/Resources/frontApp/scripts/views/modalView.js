@@ -37,20 +37,19 @@ export default Marionette.View.extend({
   },
 
   showAddImageView: function (id) {
-    var addImageView = new AddImageView();
+    var addImageView = new AddImageView({id: id});
 
-    addImageView.options.albumId = id;
     this.showChildView('container', addImageView);
   },
 
-  showEditAlbumView: function (option) {
-    var editAlbumView = new EditAlbumView();
+  showEditAlbumView: function (id) {
+    var editAlbumView = new EditAlbumView({albumId: id});
 
     this.showChildView('container', editAlbumView);
   },
 
-  showEditImageView: function (option) {
-    var editImageView = new EditImageView();
+  showEditImageView: function (id) {
+    var editImageView = new EditImageView({imageId: id});
 
     this.showChildView('container', editImageView);
   },

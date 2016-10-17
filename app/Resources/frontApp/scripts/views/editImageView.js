@@ -27,9 +27,14 @@ export default Marionette.View.extend({
     data = form.serialize();
 
     $.ajax({
-      method: 'PUT',
+      type: 'PUT',
       url: url,
       data: data,
+      cache: false,
+      processData: false,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
 
       success: function(data) {
         this.triggerMethod('edit:image', data);
