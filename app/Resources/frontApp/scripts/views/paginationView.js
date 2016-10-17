@@ -20,6 +20,12 @@ export default Marionette.View.extend({
     page = parseInt(page);
     pages = parseInt(pages);
 
+    if (pages === 0) {
+      this.$el.find('[data-next]').hide();
+      this.$el.find('[data-prev]').hide();
+      return;
+    }
+
     if (page === pages) {
       this.$el.find('[data-next]').hide();
     }
