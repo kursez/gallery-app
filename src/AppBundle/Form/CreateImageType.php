@@ -32,7 +32,7 @@ class CreateImageType extends AbstractType
         'class' => 'AppBundle:Album',
         'constraints' =>
         [
-            new NotBlank(['message' => 'Name cannot be empty']),
+            new NotBlank(['message' => 'Album id cannot be empty']),
         ]])
     ->add('src',  FileType::class, ['constraints' =>
       [

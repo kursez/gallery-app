@@ -24,7 +24,7 @@ export default Marionette.View.extend({
 
     form = this.$el;
     form.attr('enctype', 'multipart/form-data');
-    form.find('input[name="create_image[album]"]').val(this.getOption('albumId'));
+    form.find('input[name="create_image[album]"]').val(this.getOption('imageId'));
     data = new FormData(form[0]);
 
     $.ajax({

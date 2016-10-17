@@ -37,7 +37,7 @@ export default Marionette.View.extend({
   },
 
   showAddImageView: function (id) {
-    var addImageView = new AddImageView({id: id});
+    var addImageView = new AddImageView({imageId: id});
 
     this.showChildView('container', addImageView);
   },
