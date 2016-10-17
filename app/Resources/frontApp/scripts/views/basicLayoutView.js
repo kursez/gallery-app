@@ -34,7 +34,7 @@ export default Marionette.View.extend({
 
   onShowAlbums: function () {
     var titleView = new TitleView({model: {title: 'Albums'}}),
-        optionsView = new OptionsView({'data-options-action': ''});
+      optionsView = new OptionsView({'data-options-action': ''});
 
     this.albumsView = new AlbumsView({collection: this.getOption('albumCollection')});
     this.showChildView('title', titleView);
@@ -45,8 +45,8 @@ export default Marionette.View.extend({
   },
 
   onShowAlbum: function (album, pagination) {
-    var titleView = new TitleView({model: {title: 'Album: ' + album.name }}),
-        optionsView = new OptionsView({'data-options-action': album.id});
+    var titleView = new TitleView({model: {title: 'Album: ' + album.name}}),
+      optionsView = new OptionsView({'data-options-action': album.id});
 
     this.imagesView = new ImagesView({collection: this.getOption('imageCollection')});
     this.showChildView('title', titleView);
@@ -64,7 +64,7 @@ export default Marionette.View.extend({
     }
   },
 
-  onChildviewCloseModal: function() {
+  onChildviewCloseModal: function () {
     this.modal.openModal();
   },
 
@@ -90,7 +90,7 @@ export default Marionette.View.extend({
 
   onChildviewEditAlbum: function (data) {
     var child,
-        id;
+      id;
 
     data = JSON.parse(data);
     id = parseInt(data.id);
@@ -112,7 +112,7 @@ export default Marionette.View.extend({
 
   onChildviewEditImage: function (data) {
     var child,
-        id;
+      id;
 
     data = JSON.parse(data);
     id = parseInt(data.id);
@@ -148,7 +148,7 @@ export default Marionette.View.extend({
     this.modal.openModal();
   },
 
-  onChildviewOpenModal: function(child) {
+  onChildviewOpenModal: function (child) {
     var attr = child.$el.attr('data-options-action');
 
     if (typeof attr !== 'undefined') {

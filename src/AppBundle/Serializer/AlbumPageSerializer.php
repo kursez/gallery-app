@@ -8,4 +8,6 @@ use AppBundle\Serializer\GallerySerializer;
 /**
  * Album page serializer
  */
-class AlbumPageSerializer extends GallerySerializer {}
+class AlbumPageSerializer extends GallerySerializer
+{
+}

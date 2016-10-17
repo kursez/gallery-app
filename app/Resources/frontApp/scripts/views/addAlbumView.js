@@ -20,7 +20,7 @@ export default Marionette.View.extend({
   onClickEvent: function (e) {
     e.preventDefault();
     var form,
-        data;
+      data;
 
     this.triggerMethod('show:loader', this);
 
@@ -32,14 +32,14 @@ export default Marionette.View.extend({
       url: routes.postAlbum(),
       data: data,
 
-      success: function(data) {
+      success: function (data) {
         this.triggerMethod('add:album', data);
         this.triggerMethod('hide:loader', this);
         this.triggerMethod('close:modal', this);
 
       }.bind(this),
 
-      error: function(data) {
+      error: function (data) {
         this.triggerMethod('show:error', data);
         this.triggerMethod('hide:loader', this);
 

@@ -7,4 +7,6 @@ use AppBundle\Serializer\GallerySerializer;
 /**
  * Albums serializer
  */
-class AlbumsSerializer extends GallerySerializer {}
+class AlbumsSerializer extends GallerySerializer
+{
+}

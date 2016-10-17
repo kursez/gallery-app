@@ -7,7 +7,7 @@ export default Marionette.AppRouter.extend({
     'album/:id': 'showAlbum',
     'album/:id/page/:page': 'showAlbumPage'
   },
-  initialize: function() {
+  initialize: function () {
     this.controller = new Controller();
   }
 });

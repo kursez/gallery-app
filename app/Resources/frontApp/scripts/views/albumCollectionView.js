@@ -13,18 +13,17 @@ export default Marionette.CollectionView.extend({
     'content': '#content'
   },
 
-  onChildviewSelectAlbum: function(album) {
+  onChildviewSelectAlbum: function (album) {
     var delayLoopCallback = new DelayLoopCallback();
     this.$el.addClass('animate-shrink-300');
 
     delayLoopCallback
-        .setLoopCount(1)
-        .setLoopPeriod(300)
-        .setEndCallback(function () {
-          Backbone.history.navigate('album/' + album.model.attributes.id + '/page/1', true);
-        }.bind(this))
-        .execute();
-
+      .setLoopCount(1)
+      .setLoopPeriod(300)
+      .setEndCallback(function () {
+        Backbone.history.navigate('album/' + album.model.attributes.id + '/page/1', true);
+      }.bind(this))
+      .execute();
   },
 
   onChildviewDeleteAlbum: function (data) {

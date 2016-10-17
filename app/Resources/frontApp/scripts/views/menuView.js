@@ -28,8 +28,8 @@ export default Marionette.View.extend({
   deleteEntry: function (e) {
     e.preventDefault();
     var route,
-        dataType = this.$el.attr('data-type'),
-        dataTypeId = this.$el.attr('data-type-id');
+      dataType = this.$el.attr('data-type'),
+      dataTypeId = this.$el.attr('data-type-id');
 
     if (dataType === 'album') {
       route = routes.deleteAlbum(dataTypeId);
@@ -38,7 +38,7 @@ export default Marionette.View.extend({
       route = routes.deleteImage(dataTypeId);
 
     } else {
-      throw new Error({'error':'No such data type'});
+      throw new Error({'error': 'No such data type'});
 
     }
 
@@ -46,11 +46,11 @@ export default Marionette.View.extend({
       method: 'DELETE',
       url: route,
 
-      success: function() {
+      success: function () {
         this.triggerMethod('delete:' + dataType, dataTypeId);
       }.bind(this),
 
-      error: function(data) {
+      error: function (data) {
         this.triggerMethod('show:error', data);
       }.bind(this)
     });
@@ -58,7 +58,7 @@ export default Marionette.View.extend({
 
   editEntry: function () {
     var dataType = this.$el.attr('data-type'),
-        dataTypeId = this.$el.attr('data-type-id');
+      dataTypeId = this.$el.attr('data-type-id');
 
     this.triggerMethod('open:edit:' + dataType + ':modal', dataTypeId);
   }

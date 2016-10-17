@@ -28,7 +28,7 @@ class MainController extends Controller
     public function indexAction(Request $request)
     {
         return $this->render('index.html.twig', array(
-            'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
+            'base_dir' => realpath($this->container->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
         ));
     }
 
@@ -42,7 +42,7 @@ class MainController extends Controller
             ->getRepository('AppBundle:Image')
             ->findAll();
 
-        $paginator  = $this->get('knp_paginator');
+        $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $images,
             $request->query->getInt('page', 1),
@@ -118,7 +118,7 @@ class MainController extends Controller
         $em->remove($image);
         $em->flush();
 
-        return new JsonResponse('Image with id: '. $id . ' successfully deleted');
+        return new JsonResponse('Image with id: ' . $id . ' successfully deleted');
     }
 
     /**
@@ -151,7 +151,7 @@ class MainController extends Controller
     {
         $images = $album->getImages();
 
-        $paginator  = $this->get('knp_paginator');
+        $paginator = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $images,
             $request->query->getInt('page', $page),
@@ -224,6 +224,6 @@ class MainController extends Controller
         $em->remove($album);
         $em->flush();
 
-        return new JsonResponse('Album with id: '. $id . ' successfully deleted');
+        return new JsonResponse('Album with id: ' . $id . ' successfully deleted');
     }
 }

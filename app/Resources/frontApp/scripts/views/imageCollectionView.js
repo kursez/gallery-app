@@ -6,7 +6,7 @@ export default Marionette.CollectionView.extend({
   childView: Image,
   className: 'row',
 
-  onChildviewSelectEntry: function(child) {
+  onChildviewSelectEntry: function (child) {
     this.triggerMethod('select:entry', child.model);
   },
 

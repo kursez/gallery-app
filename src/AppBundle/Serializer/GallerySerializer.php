@@ -10,16 +10,18 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
  */
 class GallerySerializer
 {
-  private $normalizer;
+    private $normalizer;
 
-  public function __construct($normalizer) {
-    $this->normalizer = $normalizer;
-  }
+    public function __construct($normalizer)
+    {
+        $this->normalizer = $normalizer;
+    }
 
-  public function serialize($obj) {
-    $encoder = new JsonEncoder();
-    $serializer = new Serializer(array($this->normalizer), array($encoder));
+    public function serialize($obj)
+    {
+        $encoder = new JsonEncoder();
+        $serializer = new Serializer(array($this->normalizer), array($encoder));
 
-    return $serializer->serialize($obj, 'json');
-  }
+        return $serializer->serialize($obj, 'json');
+    }
 }

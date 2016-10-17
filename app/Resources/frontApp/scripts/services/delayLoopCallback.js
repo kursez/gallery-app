@@ -8,10 +8,11 @@ export default Marionette.Object.extend({
     'endCallBack': 'You need to set the endCalBack function with the "setEndCallback" Method in order for the delayLoopCallback to complete it\'s purpose);'
   },
 
+  loopCallback: function () {
+  },
 
-  loopCallback: function () {},
-
-  endCallback: function () {},
+  endCallback: function () {
+  },
 
   setLoopCount: function (loopCount) {
     this.loopCount = loopCount;
@@ -48,7 +49,6 @@ export default Marionette.Object.extend({
 
     function executeDelay() {
       loopCount = loopCount - 1;
-
 
       if (loopCount > 0) {
         setTimeout(function () {

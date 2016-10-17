@@ -15,7 +15,7 @@ export default Marionette.View.extend({
 
   onRender: function () {
     var pages = this.getOption('pages'),
-        page = this.getOption('page');
+      page = this.getOption('page');
 
     page = parseInt(page);
     pages = parseInt(pages);

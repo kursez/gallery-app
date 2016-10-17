@@ -1,41 +1,41 @@
 export default {
-  getAlbums: function() {
+  getAlbums: function () {
     return 'albums';
   },
 
-  getAlbum: function(id) {
+  getAlbum: function (id) {
     return 'album/' + id;
   },
 
-  getAlbumWithPagination: function(id, page) {
+  getAlbumWithPagination: function (id, page) {
     return 'album/' + id + '/page/' + page;
   },
 
-  postAlbum: function() {
+  postAlbum: function () {
     return 'album';
   },
 
-  putAlbum: function(id) {
+  putAlbum: function (id) {
     return 'album/' + id;
   },
 
-  deleteAlbum: function(id) {
+  deleteAlbum: function (id) {
     return 'album/' + id;
   },
 
-  getImage: function(id) {
+  getImage: function (id) {
     return 'image/' + id;
   },
 
-  postImage: function() {
+  postImage: function () {
     return 'image';
   },
 
-  putImage: function(id) {
+  putImage: function (id) {
     return 'image/' + id;
   },
 
-  deleteImage: function(id) {
+  deleteImage: function (id) {
     return 'image/' + id;
   }
 };

@@ -45,7 +45,7 @@ class Image
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -91,7 +91,7 @@ class Image
     /**
      * Get album
      *
-     * @return \AppBundle\Entity\Album 
+     * @return \AppBundle\Entity\Album
      */
     public function getAlbum()
     {
@@ -114,7 +114,7 @@ class Image
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {

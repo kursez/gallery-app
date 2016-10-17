@@ -34,14 +34,15 @@ class Album
      */
     private $images;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->images = new ArrayCollection();
     }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -74,7 +75,7 @@ class Album
     /**
      * Get images
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getImages()
     {
@@ -97,7 +98,7 @@ class Album
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {

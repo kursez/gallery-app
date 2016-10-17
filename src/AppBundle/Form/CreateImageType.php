@@ -9,50 +9,74 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 
 
 class CreateImageType extends AbstractType
 {
-  /**
-   * @param array $options
-   */
-  public function buildForm(FormBuilderInterface $builder, array $options)
-  {
-    $builder->add('name', "text", ['constraints' =>
-        [
-            new NotBlank(['message' => 'Name cannot be empty']),
-            new Length([
-                'min' => 2,
-                'minMessage' => 'Name must have more than 2 characters',
-                'max' => 250,
-                'maxMessage' => 'Name must have no more than 250 characters'
-            ])
-        ]])
-    ->add('album', EntityType::class, [
-        'class' => 'AppBundle:Album',
-        'constraints' =>
-        [
-            new NotBlank(['message' => 'Album id cannot be empty']),
-        ]])
-    ->add('src',  FileType::class, ['constraints' =>
-      [
-          new NotBlank(['message' => 'File cannot be empty']),
-      ]]);
-  }
+    /**
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('name', "text", [
+                    'constraints' =>
+                        [
+                            new NotBlank(
+                                [
+                                    'message' => 'Name cannot be empty'
+                                ]
+                            ),
+                            new Length(
+                                [
+                                    'min' => 2,
+                                    'minMessage' => 'Name must have more than 2 characters',
+                                    'max' => 250,
+                                    'maxMessage' => 'Name must have no more than 250 characters'
+                                ]
+                            )
+                        ]
+                ]
+            )
+            ->add('album', EntityType::class, [
+                    'class' => 'AppBundle:Album',
+                    'constraints' =>
+                        [
+                            new NotBlank(
+                                [
+                                    'message' => 'Album id cannot be empty'
+                                ]
+                            ),
+                        ]
+                ]
+            )
+            ->add('src', FileType::class, [
+                    'constraints' =>
+                        [
+                            new NotBlank(['message' => 'File cannot be empty']),
+                            new File([
+                                'maxSize' => '2M',
+                                'maxSizeMessage' => 'File can\'t be bigger than 2 Megabytes'
+                            ]),
+                        ]
+                ]
+            );
+    }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setDefaultOptions(OptionsResolverInterface $resolver)
-  {
-    $resolver->setDefaults(array(
-        'data_class'      => 'AppBundle\Entity\Image',
-        'csrf_protection' => false
-    ));
-  }
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'AppBundle\Entity\Image',
+            'csrf_protection' => false
+        ));
+    }
 
-  public function getName()
-  {
-    return 'create_image';
-  }
+    public function getName()
+    {
+        return 'create_image';
+    }
 }

@@ -20,8 +20,8 @@ export default Marionette.View.extend({
   onClickEvent: function (e) {
     e.preventDefault();
     var form,
-        data,
-        url = routes.putAlbum(this.getOption('albumId'));
+      data,
+      url = routes.putAlbum(this.getOption('albumId'));
 
     this.triggerMethod('show:loader', this);
 
@@ -38,13 +38,13 @@ export default Marionette.View.extend({
         'Content-Type': 'application/x-www-form-urlencoded'
       },
 
-      success: function(data) {
+      success: function (data) {
         this.triggerMethod('edit:album', data);
         this.triggerMethod('close:modal', this);
         this.triggerMethod('hide:loader', this);
       }.bind(this),
 
-      error: function(data) {
+      error: function (data) {
         this.triggerMethod('show:error', data);
         this.triggerMethod('hide:loader', this);
       }.bind(this)
