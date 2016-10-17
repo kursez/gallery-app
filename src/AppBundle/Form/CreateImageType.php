@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Image;
 
 
 class CreateImageType extends AbstractType
@@ -54,8 +54,8 @@ class CreateImageType extends AbstractType
             ->add('src', FileType::class, [
                     'constraints' =>
                         [
-                            new NotBlank(['message' => 'File cannot be empty']),
-                            new File([
+//                            new NotBlank(['message' => 'File cannot be empty']),
+                            new Image([
                                 'maxSize' => '2M',
                                 'maxSizeMessage' => 'File can\'t be bigger than 2 Megabytes'
                             ]),
