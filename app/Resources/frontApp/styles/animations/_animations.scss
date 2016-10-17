@@ -421,3 +421,21 @@
 [data-text-media-anim="reversed"] {
   transform: translateX(-100px);
 }
+
+@keyframes radiate {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.radiate {
+  animation-name: radiate;
+}

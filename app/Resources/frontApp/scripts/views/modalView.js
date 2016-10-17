@@ -63,6 +63,14 @@ export default Marionette.View.extend({
     this.$el.find('.modal__error').hide();
   },
 
+  onChildviewShowLoader: function () {
+    this.$el.addClass('modal--loader');
+  },
+
+  onChildviewHideLoader: function () {
+    this.$el.removeClass('modal--loader');
+  },
+
   onChildviewCloseModal: function () {
     this.closeModal();
   },

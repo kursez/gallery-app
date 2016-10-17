@@ -50,6 +50,39 @@
   padding: $separator-md;
   background-color: $color-white;
   position: relative;
+
+  &:after {
+    content: 'processing...';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    z-index: -1;
+    color: $color-white;
+
+    @extend .type;
+    @extend .type--300;
+    @extend .type--title;
+  }
+
+  .modal--loader & {
+    &:after {
+      z-index: 2;
+      opacity: 1;
+      @extend .radiate;
+      @extend .animated;
+
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-fill-mode: forwards;
+    }
+  }
 }
 
 .modal__header {
