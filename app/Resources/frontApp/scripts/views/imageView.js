@@ -8,6 +8,7 @@ export default Marionette.View.extend({
   className: 'col-xs-12 col-sm-6 col-md-4 image',
   template: _.template(template),
   model: Image,
+
   triggers: {
     click: 'select:entry'
   }
