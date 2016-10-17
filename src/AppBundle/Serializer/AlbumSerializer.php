@@ -2,24 +2,9 @@
 
 namespace AppBundle\Serializer;
 
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use AppBundle\Serializer\GallerySerializer;
 
 /**
  * Album serializer
  */
-class AlbumSerializer
-{
-  private $normalizer;
-
-  public function __construct($normalizer) {
-    $this->normalizer = $normalizer;
-  }
-
-  public function serialize($obj) {
-    $encoder = new JsonEncoder();
-    $serializer = new Serializer(array($this->normalizer), array($encoder));
-
-    return $serializer->serialize($obj, 'json');
-  }
-}
+class AlbumSerializer extends GallerySerializer {}
