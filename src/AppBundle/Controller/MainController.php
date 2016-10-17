@@ -91,11 +91,10 @@ class MainController extends Controller
      * @Route("/image/{id}", name="putImage")
      * @Method({"PUT"})
      */
-    public function putImageAction(Request $request)
+    public function putImageAction(Image $image, Request $request)
     {
-        $image = new Image();
         $form = $this->createForm($this->get('app.edit_image_type'), $image);
-        $form->submit($request);
+        $form = $form->submit($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -175,7 +174,7 @@ class MainController extends Controller
     {
         $album = new Album();
         $form = $this->createForm($this->get('app.create_album_type'), $album);
-        $form->submit($request);
+        $form = $form->submit($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -192,11 +191,10 @@ class MainController extends Controller
      * @Route("/album/{id}", name="putAlbum")
      * @Method({"PUT"})
      */
-    public function putAlbumAction($id, Request $request)
+    public function putAlbumAction(Album $album, Request $request)
     {
-        $album = new Album();
         $form = $this->createForm($this->get('app.create_album_type'), $album);
-        $form->submit($request);
+        $form = $form->submit($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
